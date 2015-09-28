@@ -1,0 +1,45 @@
+<%= form_for(@calendar_event) do |f| %>
+  <% if @calendar_event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@calendar_event.errors.count, "error") %> prohibited this calendar_event from being saved:</h2>
+
+      <ul>
+      <% @calendar_event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :start_time %><br>
+    <%= f.datetime_select :start_time %>
+  </div>
+  <div class="field">
+    <%= f.label :endtime %><br>
+    <%= f.datetime_select :endtime %>
+  </div>
+  <div class="field">
+    <%= f.label :cost %><br>
+    <%= f.number_field :cost %>
+  </div>
+  <div class="field">
+    <%= f.label :show_register_link %><br>
+    <%= f.check_box :show_register_link %>
+  </div>
+  <div class="field">
+    <%= f.label :show_donate_link %><br>
+    <%= f.check_box :show_donate_link %>
+  </div>
+  <div class="field">
+    <%= f.label :childcare_available %><br>
+    <%= f.check_box :childcare_available %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

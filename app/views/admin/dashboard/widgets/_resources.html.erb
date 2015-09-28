@@ -1,0 +1,23 @@
+<!-- This probably needs a rename, but for the moment is ok -->
+
+<% if (resources = Typus.resources.delete_if { |r| !(admin_user.is_a?(FakeUser) || admin_user.resources.include?(r)) }).any? %>
+
+  <h2><%= t("typus.dashboard.resources") %></h2>
+
+  <table>
+
+    <thead>
+      <tr>
+        <th><%= t("typus.dashboard.name") %></th>
+      </tr>
+    </thead>
+
+    <% resources.each do |resource| %>
+      <tr>
+        <td><%= link_to t(resource.titleize.capitalize), :controller => "/admin/#{resource.underscore}" %></td>
+      </tr>
+    <% end %>
+
+  </table>
+
+<% end %>

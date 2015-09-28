@@ -1,0 +1,26 @@
+<%
+  page_title = t('typus.resources.show.title', label: @item.to_label)
+  admin_title(page_title)
+%>
+
+<% content_for :main_grid do %>
+
+  <% unless headless_mode? %>
+    <h1><%= page_title %></h1>
+  <% end %>
+
+  <%= admin_display_flash_message %>
+
+  <%= render 'show' %>
+
+  <% build_display(@item, fields).each do |attribute, type| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= attribute %></h3>
+      </div>
+      <div class="panel-body">
+        <%= type %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

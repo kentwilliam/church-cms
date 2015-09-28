@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @calendar_event.title %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @calendar_event.start_time %>
+</p>
+
+<p>
+  <strong>Endtime:</strong>
+  <%= @calendar_event.endtime %>
+</p>
+
+<p>
+  <strong>Cost:</strong>
+  <%= @calendar_event.cost %>
+</p>
+
+<p>
+  <strong>Show register link:</strong>
+  <%= @calendar_event.show_register_link %>
+</p>
+
+<p>
+  <strong>Show donate link:</strong>
+  <%= @calendar_event.show_donate_link %>
+</p>
+
+<p>
+  <strong>Childcare available:</strong>
+  <%= @calendar_event.childcare_available %>
+</p>
+
+<%= link_to 'Edit', edit_calendar_event_path(@calendar_event) %> |
+<%= link_to 'Back', calendar_events_path %>

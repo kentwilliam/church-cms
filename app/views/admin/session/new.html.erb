@@ -1,0 +1,18 @@
+<%
+  @page_title = t('.title')
+  admin_title(@page_title)
+%>
+
+<%= form_for Typus.user_class_as_symbol,
+             url: { action: :create, return_to: params[:return_to] },
+             html: { class: "form-signin" } do |form| %>
+  <%= render partial: 'admin/account/form', locals: { form: form } %>
+<% end %>
+
+<% if Typus.mailer_sender %>
+  <% content_for :actions do %>
+    <ul>
+      <li><%= link_to t('.recover_password'), forgot_password_admin_account_index_path %></li>
+    </ul>
+  <% end %>
+<% end %>

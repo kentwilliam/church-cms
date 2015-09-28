@@ -1,0 +1,14 @@
+<% if actions.any? %>
+  <h3><%= t('typus.sidebar.actions') %></h3>
+  <ul class="nav nav-pills nav-stacked">
+    <% actions.each do |action| %>
+      <% klass = action[:url][:action].eql?(params[:action]) && params[:scope].nil? ? 'active' : 'inactive' %>
+      <li class="<%= klass %>">
+        <%= link_to url_for(action[:url]) do %>
+          <span class="glyphicon glyphicon-<%= action[:icon] %>"></span>
+          <%= action[:message] %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

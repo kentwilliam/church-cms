@@ -1,0 +1,8 @@
+# Use the README file as a reference to customize settings.
+
+CalendarEvent:
+  fields:
+    default: title, start_time, endtime, cost, show_register_link, show_donate_link, childcare_available
+    form: title, start_time, endtime, cost, show_register_link, show_donate_link, childcare_available
+  relationships:
+  application: Application

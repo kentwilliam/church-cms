@@ -1,0 +1,21 @@
+<div class="media">
+  <% html_options = { 'class' => 'pull-left thumbnail', 'data-toggle' => 'modal', 'modal-id' => "#{item.id}_#{attribute}" } %>
+
+  <%= render partial: 'admin/templates/modals/dragonfly',
+             locals: { html_options: html_options, preview: preview, attachment: attachment } %>
+
+  <%= link_to "#preview_#{html_options['modal-id']}", html_options do %>
+    <%= image_tag thumb, class: 'media-object', alt: preview %>
+  <% end %>
+
+  <div class="media-body">
+    <dl>
+      <dt>File name</dt>
+      <dd><%= attachment.name %></dd>
+      <dt>File type</dt>
+      <dd><%= attachment.mime_type %></dd>
+      <dt>Dimensions</dt>
+      <dd><%= attachment.width %> x <%= attachment.height %></dd>
+    </dl>
+  </div>
+</div>

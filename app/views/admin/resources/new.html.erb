@@ -1,0 +1,20 @@
+<%
+  page_title = t('typus.resources.add.title', :resource => @resource.model_name.human)
+  admin_title(page_title)
+%>
+
+<% content_for :main_grid do %>
+  <%= render 'new' %>
+
+  <% unless headless_mode? %>
+    <h1><%= page_title %></h1>
+  <% end %>
+
+  <%= admin_display_flash_message %>
+
+  <%= render 'form', { options: params.dup.cleanup.merge(:action => 'create') } %>
+
+  <% unless headless_mode? %>
+    <%= render 'admin/shared/modals' %>
+  <% end %>
+<% end %>

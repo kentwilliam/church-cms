@@ -1,0 +1,23 @@
+<!-- List of all available models -->
+
+<h2><%= t("typus.dashboard.users") %> <%= Typus.user_class.count %></h2>
+
+<table class="table">
+
+  <thead>
+    <tr>
+      <th><%= t('typus.dashboard.user') %></th>
+      <th><%= t('typus.dashboard.status') %></th>
+      <th><%= t('typus.dashboard.last_logged_in') %></th>
+    </tr>
+  </thead>
+
+  <% Typus.user_class.limit(5).each do |user| %>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= user.status %></td>
+      <td><%= user.created_at %></td>
+    </tr>
+  <% end %>
+
+</table>

@@ -1,0 +1,44 @@
+<%
+  applications = admin_user.applications
+
+  if params[:application]
+    applications.reject! { |a| a.parameterize != params[:application] }
+  end
+%>
+
+<h2><%= t("Dashboard") %></h2>
+
+<div class="row">
+
+  <% if applications.any? %>
+    <% applications.each do |app| %>
+      <div class="span3">
+        <div class="well">
+          <table class="table">
+
+            <thead>
+              <tr>
+                <th><%= t(app) %></th>
+              </tr>
+            </thead>
+
+            <% admin_user.application(app).map(&:constantize).each do |klass| %>
+              <% unless klass.typus_options_for(:hide_from_dashboard) %>
+                <tr>
+                  <td>
+                    <%= link_to klass.model_name.human(count: 1_000), controller: "/admin/#{klass.to_resource}" %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+
+          </table>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="notice">
+      <%= t('typus.dashboard.no_applications') %>
+    </div>
+  <% end %>
+</div>

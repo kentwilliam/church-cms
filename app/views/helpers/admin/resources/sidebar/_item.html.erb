@@ -1,0 +1,26 @@
+<% if @item && @item.persisted? %>
+
+  <%
+     item_actions = {
+       edit: { message: t('typus.buttons.edit'), icon: 'edit' },
+       show: { message: t('typus.buttons.show'), icon: 'info-sign' },
+       destroy: { message: t('typus.buttons.destroy'), icon: 'remove' },
+     }
+  %>
+
+  <h3><%= t('typus.sidebar.entry') %></h3>
+
+  <ul class="nav nav-pills nav-stacked">
+    <% item_actions.each do |key, value| %>
+      <% if admin_user.can?(key.to_s, @resource.model_name) %>
+        <li class="<%= params[:action].to_sym.eql?(key) ? 'active' : 'inactive' %>">
+          <%= link_to url_for(params.merge(action: key)), data: value[:data] do %>
+            <span class="glyphicon glyphicon-<%= value[:icon] %>"></span>
+            <%= value[:message] %>
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+
+<% end %>

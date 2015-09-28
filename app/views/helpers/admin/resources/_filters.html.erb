@@ -1,0 +1,16 @@
+<div class="well well-sm" style="margin-top: 10px;">
+  <%= form_tag nil, method: :get, class: 'form-inline', role: 'form' do %>
+
+    <% filters.each do |filter| %>
+      <% key, value = filter[:key], filter[:value] %>
+      <%= select_tag key, options_for_select(value, params[key]) %>
+    <% end %>
+
+    <% hidden_filters.each do |key, value| %>
+      <%= hidden_field_tag key, value %>
+    <% end %>
+
+    <%= submit_tag t('typus.buttons.filter'), name: nil, class: 'btn btn-default btn-xs' %>
+
+  <% end %>
+</div>

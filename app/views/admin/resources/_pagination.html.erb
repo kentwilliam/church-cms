@@ -1,0 +1,15 @@
+<ul class="pager">
+  <% if options[:previous] %>
+    <li class="previous">
+      <% message = t('typus.pagination.previous').html_safe %>
+      <%= link_to message, options[:previous] %>
+    </li>
+  <% end %>
+
+  <% if options[:next] %>
+    <li class="next">
+      <% message = t('typus.pagination.next').html_safe %>
+      <%= link_to message, options[:next] %>
+    </li>
+  <% end %>
+</ul>

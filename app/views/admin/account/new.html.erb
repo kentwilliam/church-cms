@@ -1,0 +1,10 @@
+<%
+  @page_title = t('.title')
+  admin_title(@page_title)
+%>
+
+<%= form_for Typus.user_class_as_symbol,
+             url: { action: :create },
+             html: { class: "form-signin" } do |form| %>
+  <%= render partial: "form", locals: { form: form } %>
+<% end %>

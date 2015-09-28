@@ -1,0 +1,17 @@
+<div class="wello">
+  <h3><%= t('typus.sidebar.search') %></h3>
+  <ul class="nav nav-pills nav-stacked">
+    <li>
+      <%= form_tag typus_search_path, method: :get, class: 'form-search' do %>
+
+        <div class="input-append">
+          <%= search_field_tag 'search', nil, class: 'form-control input-sm', placeholder: params[:search] %>
+        </div>
+
+        <% hidden_filters.each do |key, value| %>
+          <%= hidden_field_tag key, value %>
+        <% end %>
+      <% end %>
+    </li>
+  </ul>
+</div>

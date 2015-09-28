@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html lang="<%= I18n.locale %>">
+
+<head>
+  <%= render 'admin/shared/head' %>
+
+  <style type="text/css">
+    body { padding: 40px 0; background-color: #eee; }
+  </style>
+</head>
+
+<body class="base">
+  <div class="container">
+    <%= yield :layout %>
+
+    <% if content_for?(:actions) %>
+      <div class="form-signin actions">
+        <%= yield :actions %>
+      </div>
+    <% end %>
+  </div>
+
+</body>
+
+</html>

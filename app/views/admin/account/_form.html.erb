@@ -1,0 +1,17 @@
+<h2 class="form-signin-heading">
+  <%= @page_title %>
+</h2>
+
+<%= admin_display_flash_message %>
+
+<% label = Typus.user_class.human_attribute_name(:email) %>
+<%= form.text_field :email, placeholder: label, class: 'form-control', autofocus: 'autofocus' %>
+
+<% if controller.controller_name == 'session' %>
+  <% label = Typus.user_class.human_attribute_name(:password) %>
+  <%= form.password_field :password, placeholder: label, class: 'form-control' %>
+<% end %>
+
+<button class="btn btn-lg btn-primary btn-block" type="submit">
+  <%= t('.submit') %>
+</button>

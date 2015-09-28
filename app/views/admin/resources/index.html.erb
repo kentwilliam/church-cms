@@ -1,0 +1,29 @@
+<%
+  page_title = @resource.model_name.human(count: 1_000)
+  admin_title(page_title)
+%>
+
+<% content_for :main_grid do %>
+
+  <% render 'index' %>
+
+  <h1><%= page_title %></h1>
+
+  <%= admin_display_flash_message %>
+
+  <%= build_filters %>
+
+  <% if @items.any? -%>
+    <% if controller.respond_to?(:bulk) %>
+      <%= build_actions { build_list(@resource, fields, @items) } %>
+    <% else %>
+      <%= build_list(@resource, fields, @items) %>
+    <% end %>
+    <%= admin_paginate %>
+  <% else %>
+    <div class="alert alert-info">
+      <p><%= t('typus.shared.no_entries_found') %></p>
+    </div>
+  <% end %>
+
+<% end %>

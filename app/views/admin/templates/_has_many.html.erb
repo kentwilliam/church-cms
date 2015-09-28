@@ -1,0 +1,18 @@
+<%= render partial: 'admin/templates/modals/has_many' %>
+
+<div class="box_relationships" id="<%= association_name %>">
+
+  <h2>
+    <%= @resource.human_attribute_name(association_name) %>
+    <%= " (#{@data.count})" if @resource.typus_options_for(:counters) %>
+    <small><%= add_new %></small>
+  </h2>
+
+  <% if @items.any? -%>
+    <%= table %>
+    <%= admin_paginate(@model_to_relate) %>
+  <% else %>
+    <p><%= t('typus.shared.no_entries_found') %></p>
+  <% end %>
+
+</div>

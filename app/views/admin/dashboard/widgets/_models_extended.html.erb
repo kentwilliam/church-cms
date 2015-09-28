@@ -1,0 +1,25 @@
+<!-- List of all available models -->
+
+<h2><%= t('typus.dashboard.title') %></h2>
+
+<table class="table">
+
+  <thead>
+    <tr>
+      <th><%= t('typus.dashboard.model') %></th>
+      <th><%= t('typus.dashboard.items') %></th>
+      <th><%= t('typus.dashboard.actions') %></th>
+    </tr>
+  </thead>
+
+  <% admin_user.models.map(&:constantize).each do |klass| %>
+    <tr>
+      <td><%= link_to klass.model_name.human(count: 1_000), controller: "/admin/#{klass.to_resource}" %></td>
+      <td><%= klass.count %></td>
+      <td width="100px">
+        <%= link_to t('typus.buttons.add'), controller: "/admin/#{klass.to_resource}", action: 'new' %>
+      </td>
+    </tr>
+  <% end %>
+
+</table>

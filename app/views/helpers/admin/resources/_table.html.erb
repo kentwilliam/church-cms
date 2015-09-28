@@ -1,0 +1,45 @@
+<% yield_name = "table_headers_#{model}_#{rand(100)}" %>
+
+<% content_for yield_name do %>
+  <thead>
+    <tr>
+      <% if controller.respond_to?(:bulk) %>
+        <th><%= check_box_tag "action-toggle", "", false, :class => "action-toggle" %></th>
+      <% end %>
+      <% headers.each do |header| %>
+        <th><%= header %></th>
+      <% end %>
+      <th width="120"><%= t('typus.dashboard.actions') %></th>
+    </tr>
+  </thead>
+<% end %>
+
+<table class="table table-hover">
+
+  <%= yield yield_name %>
+
+  <% items.each do |item| %>
+    <tr id="<%= dom_id(item) %>">
+      <% if controller.respond_to?(:bulk) %>
+        <td width="16">
+          <%= check_box_tag "selected_item_ids[]", item.id, false, :class => "action-select" %>
+        </td>
+      <% end %>
+      <% table_fields_for_item(item, fields).each do |field| %>
+        <td><%= field %></td>
+      <% end %>
+      <td width="250">
+        <div class="btn-group btn-group-xs">
+          <% table_actions(model, item).each do |action| %>
+            <% html_options = action[:options] || {} %>
+            <%= link_to url_for(action[:url]), html_options.merge(class: 'btn btn-default btn-sm') do %>
+              <span class="glyphicon glyphicon-<%= action[:options] && action[:options][:glyphicon] || 'asterisk' %>"></span>
+              <%= action[:message] %>
+            <% end %>
+          <% end %>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+
+</table>

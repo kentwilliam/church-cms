@@ -1,0 +1,28 @@
+<%= render 'form_javascripts' %>
+
+<%= form_for @item, url: options, html: { role: 'form', multipart: true } do |form| %>
+
+  <%= render 'helpers/admin/resources/errors' %>
+
+  <%= build_form(fields, form) %>
+
+  <% if headless_mode? %>
+    <% unless @item.new_record? %>
+      <%= hidden_field_tag '_id', @item.id %>
+      <%= hidden_field_tag '_label', @item.to_label %>
+    <% end %>
+    <%= hidden_field_tag '_continue' %>
+  <% else %>
+    <% resources_actions_for_current_role.map do |body, url, options| %>
+      <%= link_to t(body), params.dup.merge!(url).compact.cleanup, options || {class: 'btn btn-default'} %>
+    <% end %>
+    <% build_save_options.each do |key, value, special| %>
+      <%
+        klass = key.eql?(:_save) ? 'btn btn-primary' : 'btn btn-default'
+        options = { name: key, onclick: 'Typus.setConfirmUnload(false);', class: klass }
+      %>
+      <%= submit_tag t(value), options %>
+    <% end %>
+  <% end %>
+
+<% end %>

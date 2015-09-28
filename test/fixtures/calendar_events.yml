@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  start_time: 2015-09-22 12:58:25
+  endtime: 2015-09-22 12:58:25
+  cost: 1
+  show_register_link: false
+  show_donate_link: false
+  childcare_available: false
+
+two:
+  title: MyString
+  start_time: 2015-09-22 12:58:25
+  endtime: 2015-09-22 12:58:25
+  cost: 1
+  show_register_link: false
+  show_donate_link: false
+  childcare_available: false

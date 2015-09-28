@@ -1,0 +1,12 @@
+<% if @item.errors.any? %>
+  <div class="alert alert-danger">
+    <h4 class="alert-heading" style="margin-bottom: 10px;">
+      <%= t('typus.errors.intro', count: @item.errors.count) %>
+    </h4>
+    <ul>
+    <% @item.errors.full_messages.each do |full_message| %>
+      <li><%= full_message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

@@ -1,0 +1,8 @@
+# Use the README file as a reference to customize settings.
+
+Post:
+  fields:
+    default: title, published, slug
+    form: title, markdown, published, slug
+  relationships:
+  application: Application

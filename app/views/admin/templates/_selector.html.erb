@@ -1,0 +1,4 @@
+<div class="form-group" id="<%= attribute_id %>">
+  <%= form.label attribute, label_text, { class: 'control-label' } %>
+  <%= form.select attribute, @resource.send(attribute.pluralize), options, { class: 'form-control' } %>
+</div>

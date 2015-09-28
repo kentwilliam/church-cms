@@ -1,0 +1,5 @@
+<div class="form-group" id="<%= attribute_id %>">
+  <%= form.label attribute, link_to_detach_attribute_for_paperclip(attribute) %>
+  <%= form.file_field attribute, options %>
+  <%= typus_paperclip_preview(@item, attribute, 'paperclip_form_preview') %>
+</div>

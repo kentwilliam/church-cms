@@ -1,0 +1,24 @@
+<meta charset="utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="generator" content="Typus <%= Typus::VERSION::STRING %>" />
+
+<link rel="shortcut icon" href="/favicon.ico" />
+
+<title><%= yield :title %> &middot; <%= Typus.admin_title %></title>
+
+<%= stylesheet_link_tag 'typus/application' %>
+<%= javascript_include_tag 'typus/application' %>
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<%= yield :stylesheets -%>
+<%= yield :javascripts -%>
+
+<%= csrf_meta_tag %>
+
+<% if Rails.env.development? %>
+  <style type="text/css">
+    .translation_missing { background: red; color: white; padding: 5px; }
+  </style>
+<% end %>

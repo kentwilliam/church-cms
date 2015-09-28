@@ -1,0 +1,19 @@
+<% if resources.any? %>
+
+  <table class="zebra-striped">
+
+    <thead>
+      <tr>
+        <th><%= t("typus.dashboard.resources") %></th>
+      </tr>
+    </thead>
+
+    <% resources.each do |resource| %>
+      <tr>
+        <td><%= link_to t(resource.titleize.capitalize), :controller => "/admin/#{resource.underscore}" %></td>
+      </tr>
+    <% end %>
+
+  </table>
+
+<% end %>
