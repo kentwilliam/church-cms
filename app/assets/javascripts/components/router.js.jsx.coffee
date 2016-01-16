@@ -34,9 +34,12 @@ createComponent 'Main',
         Hero()
         ImNew()
         Newsletter()
+        Photos1()
         About()
+        Photos2()
         Calendar()
         Splash()
+        Footer()
       ]
 
 createComponent 'Hero',
@@ -83,6 +86,14 @@ createComponent 'Newsletter',
       children: [
         "Newsletter sign-up"
       ]
+
+createComponent 'Photos1',
+  render: ->
+    div className: 'section photos-1'
+
+createComponent 'Photos2',
+  render: ->
+    div className: 'section photos-2'
 
 createComponent 'About',
   render: ->
@@ -172,6 +183,11 @@ createComponent 'Menu',
             children: "#{section.title} »"
       ]
 
+createComponent 'Footer',
+  render: ->
+    div
+      className: 'section footer'
+
 {
   Main,
   Hero,
@@ -181,7 +197,10 @@ createComponent 'Menu',
   Newsletter,
   About,
   Calendar,
-  Splash
+  Splash,
+  Photos1,
+  Photos2,
+  Footer
 } = window.Components
 
 @Router = React.createClass
