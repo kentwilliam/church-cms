@@ -43,13 +43,17 @@ createComponent 'Main',
       ]
 
 createComponent 'Hero',
+  getInitialState: ->
+    disableScreen: false
+
   render: ->
     div
-      className: 'section hero'
+      className: "section hero #{'disable-screen' if @state.disableScreen}"
       children: [
         Video()
         Menu()
       ]
+      onClick: => @setState disableScreen: !@state.disableScreen
 
 createComponent 'ImNew',
   render: ->
@@ -151,19 +155,18 @@ createComponent 'Video',
   render: ->
     div
       className: 'video'
-      children: []
-        # iframe
-        # src: 'https://player.vimeo.com/video/151691020?' +
-        #   'loop=1&' +
-        #   'color=000000&' +
-        #   'title=0&' +
-        #   'byline=0&' +
-        #   'portrait=0&' +
-        #   'autoplay=1'
-        # width: '100%'
-        # height: '100%'
-        # frameBorder: 0
-        # allowFullScreen: true
+      children: iframe
+        src: 'https://player.vimeo.com/video/151691020?' +
+          'loop=1&' +
+          'color=000000&' +
+          'title=0&' +
+          'byline=0&' +
+          'portrait=0&' +
+          'autoplay=1'
+        width: '100%'
+        height: '100%'
+        frameBorder: 0
+        allowFullScreen: true
 
 createComponent 'Menu',
   render: ->

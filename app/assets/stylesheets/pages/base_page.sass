@@ -57,7 +57,7 @@ button
     margin-bottom: 0
 
 .hero
-  min-height: 671px
+  min-height: 674px
   background: $theme-dark-gray
 
 .menu
@@ -71,6 +71,10 @@ button
   left: 50%
   margin-left: -240px
   bottom: 40px
+  transition: 0.4s
+
+  .disable-screen &
+    opacity: 0
 
   .logo
     position: absolute
@@ -118,11 +122,19 @@ button
 
 .video
   @extend %fill-parent
+  cursor: pointer
 
   &:before
     content: ""
     @extend %fill-parent
     background: rgba(60, 60, 60, 0.8)
+    transition: 0.2s
+
+  &:hover:before
+    background: rgba(60, 60, 60, 0.5)
+
+.disable-screen .video:before
+  background: rgba(60, 60, 60, 0)
 
 .newsletter
   background: $theme-dark-gray
