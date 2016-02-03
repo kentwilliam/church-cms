@@ -4,14 +4,14 @@
 {div, nav, a, h1, h2, p, em, span, iframe, button} = React.DOM
 
 SECTIONS = {
-  # "/": { title: "Home" }
-  "/new": { title: "I'm New" }
-  "/about": { title: "About Us" }
-  "/community": { title: "Community" }
-  "/volunteer": { title: "Volunteer" }
+  "/": { id: 'home', title: "Home" }
+  "/new": { id: 'new', title: "I'm New" }
+  "/about": { id: 'about', title: "About Us" }
+  "/community": { id: 'community', title: "Community" }
+  "/volunteer": { id: 'volunteer', title: "Volunteer" }
   # "/calendar": { title: "What's happening?" }
-  "/follow": { title: "Watch & Listen" }
-  "/give": { title: "Give" }
+  "/follow": { id: 'follow', title: "Watch & Listen" }
+  "/give": { id: 'give', title: "Give" }
 }
 
 # $ = require("../vendor/lodash.js")
@@ -25,22 +25,57 @@ createComponent = (name, spec) ->
   window.Components ||= {}
   window.Components[name] = React.createFactory React.createClass spec
 
+capitalizeFirst = (string) ->
+  (string.charAt 0).toUpperCase() + string.slice 1
+
 # Responsible for the main navigation and showing/hiding of main sections
 createComponent 'Main',
+  getInitialState: ->
+    scrolled: window?.pageYOffset > 500
+
+  onScroll: ->
+    @setState @getInitialState()
+
+  componentDidMount: ->
+    unless window?.addEventListener && _
+      return
+
+    window.addEventListener 'scroll', _.debounce @onScroll, 50
+
   render: ->
+    console.log 'rendering main', @props.section?.id
+    if sectionId = @props.section?.id
+      if sectionId isnt 'home'
+        pageComponent = window.Components.PageFollow
+      # pageComponent = window.Components['Page' + capitalizeFirst sectionId]
+
     div
-      className: 'main'
-      children: [
-        Hero()
-        ImNew()
-        Newsletter()
-        Photos1()
-        About()
-        Photos2()
-        Calendar()
-        Splash()
-        Footer()
-      ]
+      className: "main #{'is-scrolled' if @state.scrolled}"
+      children: if pageComponent
+        [
+          div
+            className: 'static-menu'
+            children: Menu()
+          pageComponent @props
+        ]
+      else
+        home()
+
+# pp = -> console.log.apply null, arguments
+
+home = ->
+  [
+    Hero()
+    ImNew()
+    Newsletter()
+    Photos1()
+    About()
+    Photos2()
+    Calendar()
+    Splash()
+    Footer()
+  ]
+
 
 createComponent 'Hero',
   getInitialState: ->
@@ -52,8 +87,15 @@ createComponent 'Hero',
       children: [
         Video()
         Menu()
+        ScrolledMenu()
       ]
       onClick: => @setState disableScreen: !@state.disableScreen
+
+createComponent 'ScrolledMenu',
+  render: ->
+    div
+      className: 'scrolled-menu'
+      children: Menu()
 
 createComponent 'ImNew',
   render: ->
@@ -148,8 +190,6 @@ createComponent 'Splash',
   render: ->
     div
       className: 'section splash'
-      # children:
-      #   img src: window.image_path("panel-quiet-church.jpg")
 
 createComponent 'Video',
   render: ->
@@ -179,23 +219,46 @@ createComponent 'Menu',
             em children: "City Life"
             span children: "San Francisco Church"
           ]
+          onClick: -> page '/'
 
         for path, section of SECTIONS
+          if section.id == 'home'
+            continue
           a
             href: path
-            children: "#{section.title} »"
+            children: "#{section.title}"
       ]
+      onClick: (event) -> event.stopPropagation()
 
 createComponent 'Footer',
   render: ->
     div
       className: 'section footer'
 
+createComponent 'PageFollow',
+  getInitialState: ->
+    enter: false
+
+  componentDidMount: ->
+    console.log "mount"
+    setTimeout =>
+      @setState enter: true
+    , 100
+
+  render: ->
+    div
+      className: "page page-follow #{'enter' if @state.enter}"
+      children: [
+        h1 children: @props.section.title#'Watch & Listen'
+        p children: 'content coming here ...'
+      ]
+
 {
   Main,
   Hero,
   Video,
   Menu,
+  ScrolledMenu,
   ImNew,
   Newsletter,
   About,
@@ -203,7 +266,9 @@ createComponent 'Footer',
   Splash,
   Photos1,
   Photos2,
-  Footer
+  Footer,
+  # pages
+  PageFollow
 } = window.Components
 
 @Router = React.createClass
