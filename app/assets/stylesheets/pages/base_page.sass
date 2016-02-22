@@ -1,4 +1,4 @@
-@import mixins/fill_parent
+@import "mixins/fill_parent"
 
 $page-gutter: 40px
 $section-margin: 20px
@@ -22,8 +22,11 @@ body
   font-family: "Gill Sans", "Avenir Next", sans-serif
 
 .page
-  opacity: 0
-  transform: scale(0.8)
+  // If JS is disabled, there's no entrance animation
+  .is-javascript-enabled &
+    opacity: 0
+    transform: scale(0.8)
+
   transition: 1s
   padding: 150px 40px
   background: $theme-light-gray

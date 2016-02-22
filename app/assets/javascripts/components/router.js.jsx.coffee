@@ -3,23 +3,26 @@
 
 {div, nav, a, h1, h2, p, em, span, iframe, button} = React.DOM
 
-SECTIONS = {
-  "/": { id: 'home', title: "Home" }
-  "/new": { id: 'new', title: "I'm New" }
-  "/about": { id: 'about', title: "About Us" }
+# Complete map of the site
+SECTIONS =
+  "/":          { id: 'home',      title: "Home" }
+  "/new":       { id: 'new',       title: "I'm New" }
+  "/about":     { id: 'about',     title: "About Us" }
   "/community": { id: 'community', title: "Community" }
   "/volunteer": { id: 'volunteer', title: "Volunteer" }
-  # "/calendar": { title: "What's happening?" }
-  "/follow": { id: 'follow', title: "Watch & Listen" }
-  "/give": { id: 'give', title: "Give" }
-}
+  "/calendar":  { id: 'calendar',  title: "What's happening?" }
+  "/follow":    { id: 'follow',    title: "Watch & Listen" }
+  "/give":      { id: 'give',      title: "Give" }
 
-# $ = require("../vendor/lodash.js")
-# console.log "----"
-# # console.log typeof $
-# console.log typeof _
-# console.log typeof window._
-# MENU_SECTIONS =
+# What will be shown in the main menu
+MENU = [
+  "/new",
+  "/about",
+  "/community",
+  "/volunteer",
+  "/follow",
+  "/give"
+]
 
 createComponent = (name, spec) ->
   window.Components ||= {}
@@ -32,25 +35,30 @@ capitalizeFirst = (string) ->
 createComponent 'Main',
   getInitialState: ->
     scrolled: window?.pageYOffset > 500
+    isJavaScriptEnabled: false
 
   onScroll: ->
     @setState @getInitialState()
 
   componentDidMount: ->
+    # Since `componentDidMount` only runs in the browser, we use it to tell if JS is on
+    @setState isJavaScriptEnabled: true
+
     unless window?.addEventListener && _
       return
 
     window.addEventListener 'scroll', _.debounce @onScroll, 50
 
   render: ->
-    console.log 'rendering main', @props.section?.id
-    if sectionId = @props.section?.id
-      if sectionId isnt 'home'
-        pageComponent = window.Components.PageFollow
-      # pageComponent = window.Components['Page' + capitalizeFirst sectionId]
+    className = "main " +
+      "#{'is-javascript-enabled' if @state.isJavaScriptEnabled} " +
+      "#{'is-scrolled' if @state.scrolled}"
+
+    if (sectionId = @props.section?.id) and sectionId isnt 'home'
+      pageComponent = window.Components.PageFollow
 
     div
-      className: "main #{'is-scrolled' if @state.scrolled}"
+      className: className
       children: if pageComponent
         [
           div
@@ -60,8 +68,6 @@ createComponent 'Main',
         ]
       else
         home()
-
-# pp = -> console.log.apply null, arguments
 
 home = ->
   [
@@ -75,7 +81,6 @@ home = ->
     Splash()
     Footer()
   ]
-
 
 createComponent 'Hero',
   getInitialState: ->
@@ -221,9 +226,8 @@ createComponent 'Menu',
           ]
           onClick: -> page '/'
 
-        for path, section of SECTIONS
-          if section.id == 'home'
-            continue
+        for path in MENU
+          continue unless section = SECTIONS[path]
           a
             href: path
             children: "#{section.title}"
@@ -240,7 +244,6 @@ createComponent 'PageFollow',
     enter: false
 
   componentDidMount: ->
-    console.log "mount"
     setTimeout =>
       @setState enter: true
     , 100
@@ -249,16 +252,22 @@ createComponent 'PageFollow',
     div
       className: "page page-follow #{'enter' if @state.enter}"
       children: [
-        h1 children: @props.section.title#'Watch & Listen'
+        h1 children: @props.section.title
         p children: 'content coming here ...'
       ]
 
 {
+  # Core
   Main,
-  Hero,
-  Video,
   Menu,
   ScrolledMenu,
+
+  # Home page components
+  Hero,
+  Video,
+  Footer,
+
+  # Home page sections
   ImNew,
   Newsletter,
   About,
@@ -266,11 +275,12 @@ createComponent 'PageFollow',
   Splash,
   Photos1,
   Photos2,
-  Footer,
-  # pages
+
+  # Pages
   PageFollow
 } = window.Components
 
+# The router ensures that we update the page once the user navigates
 @Router = React.createClass
   getInitialState: ->
     path: @props.path or "/"
