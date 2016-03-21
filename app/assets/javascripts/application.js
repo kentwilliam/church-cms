@@ -10,9 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require ./vendor/page
-//= require ./vendor/lodash
-//= require_tree ./lib
 //= require react
 //= require react_ujs
+//= require ./vendor/page
 //= require components

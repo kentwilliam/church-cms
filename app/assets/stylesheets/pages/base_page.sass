@@ -37,8 +37,8 @@ p
   overflow: auto
   transition: .4s
   background: white
-  // $theme-light-gray
   transform: translate(0, 0)
+  backface-visibility: hidden
 
   .is-javascript-enabled &
     // Screen that fades away the content when something new is entering
@@ -94,8 +94,7 @@ p
         //background: $theme-light-gray
 
 .page-content
-  padding: 400px 20px 20px
-  //padding-top: 200px
+  padding: 0
   transition: .4s .3s
 
   .page-transition-enter &

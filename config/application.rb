@@ -25,5 +25,8 @@ module CitylifeTypes
 
     # Include addons for React
     config.react.addons = true
+    config.react.server_renderer_options = {
+      replay_console: true
+    }
   end
 end

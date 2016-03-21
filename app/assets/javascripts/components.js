@@ -1,2 +1,9 @@
+//= require ./vendor/lodash
+//= require_tree ./lib
+//= require ./components/footer
+//= require ./components/page
+//= require ./components/menu
 //= require ./components/home
+//= require ./components/page
+//= require ./components/root_container
 //= require ./components/router
