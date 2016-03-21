@@ -1,0 +1,13 @@
+ASSETS =
+  about: "<%= asset_path 'about' %>"
+  associate_pastor: "<%= asset_path 'associate_pastor.png' %>"
+  community: "<%= asset_path 'community' %>"
+  lead_pastor: "<%= asset_path 'lead_pastor.png' %>"
+  logo: "<%= asset_path 'logo.png' %>"
+  youth_pastor: "<%= asset_path 'youth_pastor.png' %>"
+
+asset = (id) ->
+  return ASSETS[id]
+
+@Helpers ?= {}
+@Helpers.asset = asset

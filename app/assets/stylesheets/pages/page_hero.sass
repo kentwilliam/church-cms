@@ -1,0 +1,25 @@
+@import "mixins/constants"
+
+.page-hero
+  margin-top: $menu-height + $section-margin
+  width: 100%
+  background-position: center center
+  background-size: cover
+
+  display: flex
+  justify-content: center
+  align-items: center
+
+  // Used to make the page-hero a certain aspect ratio (roughly 2.4:1)
+  &:after
+    display: block
+    content: ''
+    padding-top: 41.666%
+
+  h1
+    text-transform: uppercase
+    font-weight: $light
+    color: white
+    font-size: 16vw
+    position: relative
+    top: 18px

@@ -1,21 +1,5 @@
 @import "mixins/fill_parent"
-
-$page-gutter: 40px
-$section-margin: 20px
-
-$theme-background: #e1e2de
-$theme-light-gray: #eff0ec
-$theme-dark-gray: #393839
-$theme-red: rgba(239, 61, 55, 1)
-$theme-red-transparent: rgba(239, 61, 55, 0)
-$theme-menu-background: rgba(16, 16, 16, 0.5)
-$theme-text-body-copy-color: #3d3c3d
-
-$light: 100
-$medium: 500
-
-$theme-font-display: "Gill Sans", "Avenir Next", sans-serif
-$theme-font-content: sans-serif
+@import "mixins/constants"
 
 *
   box-sizing: border-box
@@ -25,154 +9,6 @@ body
 
 p
   font-family: $theme-font-content
-
-.root-container,
-.page,
-.home
-  @extend %fill-parent
-  oveflow: hidden
-
-.page,
-.home
-  overflow: auto
-  transition: .4s
-  background: white
-  transform: translate(0, 0)
-  backface-visibility: hidden
-
-  .is-javascript-enabled &
-    // Screen that fades away the content when something new is entering
-    &:after
-      content: ''
-      pointer-events: none
-      @extend %fill-parent
-      background: transparentize($theme-dark-gray, .5)
-      opacity: 0
-      transition: .4s
-
-    &.page-transition-enter
-      transform: translate(100%, 0)
-      z-index: 1
-
-    &.page-transition-enter-active
-      transform: translate(0, 0)
-      z-index: 1
-
-    &.page-transition-leave
-      &:after
-        opacity: 0
-
-    &.page-transition-leave-active
-      &:after
-        opacity: 1
-
-// Wordpress inserts images as figures if they have captions
-//figure
-  //width: 100% !important
-  //overflow: hidden
-  //padding: 0
-  //margin: 0
-  //@extend %fill-parent-top
-
-  //img
-    //width: 100%
-    //height: auto
-
-    //// full-size images are used for header images
-    //&.size-full + figcaption
-      //color: rgba(0,0,0,0)
-      //@extend %fill-parent
-      //opacity: 0.8
-
-      //.theme-red &
-        //background: $theme-red
-
-      //.theme-dark-gray &
-        //background: $theme-dark-gray
-
-      //.theme-light-gray &
-        //background: $theme-light-gray
-
-.page-content
-  padding: 0
-  transition: .4s .3s
-
-  .page-transition-enter &
-    opacity: 0
-
-  .page-transition-enter-active &
-    opacity: 1
-
-  //.theme-red &
-    //background: $theme-red
-    //color: white
-
-  //.theme-light-gray &
-    //background: $theme-light-gray
-    //color: $theme-text-body-copy-color
-
-  //.theme-dark-gray &
-    //background: $theme-dark-gray
-    //color: white
-
-  //.theme-white &
-    //background: white
-    //color: $theme-red
-
-  h1
-    display: none
-    //text-transform: uppercase
-    //font-weight: bold
-    //text-align: center
-    //@extend %fill-parent-top
-    //left: -200px
-    //right: -200px
-    //font-size: 19vw
-    //opacity: 0.2
-    //font-weight: normal
-    //top: 100px
-
-  h2
-    min-width: 100%
-    font-weight: $light
-    text-align: center
-    font-size: 32px
-    font-weight: $medium
-    text-transform: uppercase
-    letter-spacing: 1px
-
-  h3
-    text-transform: uppercase
-    font-size: 20px
-    letter-spacing: 1px
-
-  p
-    font-size: 16px
-    font-family: sans-serif
-    font-weight: 100
-    line-height: 1.8em
-
-  section
-    &.main
-      position: relative
-      margin: 0 auto 20px
-      max-width: 1200px
-
-    &:not(.main)
-      background: white
-      color: $theme-text-body-copy-color
-      padding: 30px
-      margin: 0 0 10px
-      min-width: 250px
-
-    @media screen and (min-width: 700px)
-      &.main
-        display: flex
-        flex-wrap: wrap
-
-      &:not(.main)
-        flex: 1 1 300px
-        margin: 10px
 
 button
   background: $theme-red
@@ -213,7 +49,7 @@ button
   overflow: hidden
   padding: 21px 0 0 270px
   background: $theme-menu-background
-  font-weight: $light
+  font-weight: normal
   position: absolute
   left: 50%
   margin-left: -240px
@@ -281,7 +117,7 @@ button
   .scrolled-menu &,
   .static-menu &
     width: auto
-    height: 50px
+    height: $menu-height
     opacity: 0
     position: fixed
     left: 0

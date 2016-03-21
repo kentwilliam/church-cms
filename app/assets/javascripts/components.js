@@ -1,5 +1,6 @@
 //= require ./vendor/lodash
 //= require_tree ./lib
+//= require ./assets
 //= require ./components/footer
 //= require ./components/page
 //= require ./components/menu

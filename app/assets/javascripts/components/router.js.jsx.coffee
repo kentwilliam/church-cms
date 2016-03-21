@@ -22,7 +22,7 @@
 
     # Whenever the user clicks on a link, update the section
     for sectionPath, sectionDetails of SECTIONS
-      # `sectionPath` is stored with the closure here
+      # (do => =>) means `sectionPath` is stored with the closure here
       page sectionPath, do (sectionPath) =>
         =>
           @setState path: sectionPath
@@ -30,6 +30,7 @@
 
     # 404 not found
     page '*', ->
+      # TODO
       console.log "Not found"
 
     # Start tracking user clicks
