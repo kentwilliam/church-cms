@@ -22,5 +22,8 @@ module CitylifeTypes
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Include addons for React
+    config.react.addons = true
   end
 end

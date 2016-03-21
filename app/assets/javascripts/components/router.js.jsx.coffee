@@ -6,13 +6,13 @@
 # Complete map of the site
 SECTIONS =
   "/":          { id: 'home',      title: "Home" }
-  "/new":       { id: 'new',       title: "I'm New" }
-  "/about":     { id: 'about',     title: "About Us" }
-  "/community": { id: 'community', title: "Community" }
-  "/volunteer": { id: 'volunteer', title: "Volunteer" }
-  "/calendar":  { id: 'calendar',  title: "What's happening?" }
-  "/follow":    { id: 'follow',    title: "Watch & Listen" }
-  "/give":      { id: 'give',      title: "Give" }
+  "/new":       { id: 'new',       title: "I'm New",           theme: 'light-gray' }
+  "/about":     { id: 'about',     title: "About Us",          theme: 'red' }
+  "/community": { id: 'community', title: "Community",         theme: 'dark-gray' }
+  "/volunteer": { id: 'volunteer', title: "Volunteer",         theme: 'light-gray' }
+  "/calendar":  { id: 'calendar',  title: "What's happening?", theme: 'white' }
+  "/follow":    { id: 'follow',    title: "Watch & Listen",    theme: 'dark-gray' }
+  "/give":      { id: 'give',      title: "Give",              theme: 'red' }
 
 # What will be shown in the main menu
 MENU = [
@@ -31,8 +31,11 @@ createComponent = (name, spec) ->
 capitalizeFirst = (string) ->
   (string.charAt 0).toUpperCase() + string.slice 1
 
-# Responsible for the main navigation and showing/hiding of main sections
-createComponent 'Main',
+CssTransition = React.createFactory React.addons.CSSTransitionGroup
+
+
+# The RootContainer component decides which page to render and animates it onto the screen.
+createComponent 'RootContainer',
   getInitialState: ->
     scrolled: window?.pageYOffset > 500
     isJavaScriptEnabled: false
@@ -50,37 +53,82 @@ createComponent 'Main',
     window.addEventListener 'scroll', _.debounce @onScroll, 50
 
   render: ->
-    className = "main " +
-      "#{'is-javascript-enabled' if @state.isJavaScriptEnabled} " +
-      "#{'is-scrolled' if @state.scrolled}"
-
     if (sectionId = @props.section?.id) and sectionId isnt 'home'
-      pageComponent = window.Components.PageFollow
+      pageComponent = window.Components.Page
+      pageComponentProps = (_?.assign {}, @props, key: @props.section?.id) || @props
 
+    CssTransition
+      className: @className()
+      transitionName: 'page-transition'
+      transitionEnterTimeout: 400
+      transitionLeaveTimeout: 400
+      children: [
+        @menu()
+        if pageComponent
+          pageComponent pageComponentProps
+        else
+          Home()
+      ]
+
+  className: ->
+    "root-container " +
+    "#{'is-javascript-enabled' if @state.isJavaScriptEnabled} " +
+    "#{'is-scrolled' if @state.scrolled}"
+
+  menu: ->
     div
-      className: className
-      children: if pageComponent
-        [
-          div
-            className: 'static-menu'
-            children: Menu()
-          pageComponent @props
-        ]
-      else
-        home()
+      className: 'static-menu'
+      children: Menu activeSection: @props.section
+      key: 'menu'
 
-home = ->
-  [
-    Hero()
-    ImNew()
-    Newsletter()
-    Photos1()
-    About()
-    Photos2()
-    Calendar()
-    Splash()
-    Footer()
-  ]
+createComponent 'Home',
+  render: ->
+    div
+      className: 'home'
+      key: 'home'
+      children: [
+        Hero()
+        ImNew()
+        Newsletter()
+        Photos1()
+        About()
+        Photos2()
+        Calendar()
+        Splash()
+        Footer()
+      ]
+      #]
+
+#createComponent 'AnimateChildrenChanges',
+#getInitialState: ->
+#enteringKeys: {}
+#exitingKeys: {}
+
+#componentWillReceiveProps: ->
+#console.log "receiving props", arguments[0]?.children
+
+#componentDidReceiveProps: ->
+#console.log 'here'
+
+##component
+
+#render: ->
+##(console.log 'rendering', @props)
+##if window.location
+##console.log 'rendering'
+##console.log(@props.children)
+
+#div
+#children: @props.children
+
+# Extracts the data for a given section id
+sectionContent = (props) ->
+  return unless sectionId = props?.section?.id
+
+  props?.data?.pages?.posts
+    .filter((page) -> page.slug is sectionId)[0]
+
+#home = ->
 
 createComponent 'Hero',
   getInitialState: ->
@@ -88,11 +136,11 @@ createComponent 'Hero',
 
   render: ->
     div
-      className: "section hero #{'disable-screen' if @state.disableScreen}"
+      className: "home-section hero #{'disable-screen' if @state.disableScreen}"
       children: [
         Video()
-        Menu()
-        ScrolledMenu()
+        #Menu()
+        #ScrolledMenu()
       ]
       onClick: => @setState disableScreen: !@state.disableScreen
 
@@ -105,7 +153,7 @@ createComponent 'ScrolledMenu',
 createComponent 'ImNew',
   render: ->
     div
-      className: 'section im-new'
+      className: 'home-section im-new'
       children: [
         div
           className: 'segment'
@@ -133,23 +181,23 @@ createComponent 'ImNew',
 createComponent 'Newsletter',
   render: ->
     div
-      className: 'section newsletter'
+      className: 'home-section newsletter'
       children: [
         "Newsletter sign-up"
       ]
 
 createComponent 'Photos1',
   render: ->
-    div className: 'section photos-1'
+    div className: 'home-section photos-1'
 
 createComponent 'Photos2',
   render: ->
-    div className: 'section photos-2'
+    div className: 'home-section photos-2'
 
 createComponent 'About',
   render: ->
     div
-      className: 'section about'
+      className: 'home-section about'
       children: [
         div
           className: 'screen'
@@ -186,7 +234,7 @@ createComponent 'About',
 createComponent 'Calendar',
   render: ->
     div
-      className: 'section calendar'
+      className: 'home-section calendar'
       children: [
         "Calendar section"
       ]
@@ -194,27 +242,28 @@ createComponent 'Calendar',
 createComponent 'Splash',
   render: ->
     div
-      className: 'section splash'
+      className: 'home-section splash'
 
 createComponent 'Video',
   render: ->
     div
       className: 'video'
       children: iframe
-        src: 'https://player.vimeo.com/video/151691020?' +
-          'loop=1&' +
-          'color=000000&' +
-          'title=0&' +
-          'byline=0&' +
-          'portrait=0&' +
-          'autoplay=1'
-        width: '100%'
-        height: '100%'
-        frameBorder: 0
-        allowFullScreen: true
+        #src: 'https://player.vimeo.com/video/151691020?' +
+        #'loop=1&' +
+        #'color=000000&' +
+        #'title=0&' +
+        #'byline=0&' +
+        #'portrait=0&' +
+        #'autoplay=1'
+        #width: '100%'
+        #height: '100%'
+        #frameBorder: 0
+        #allowFullScreen: true
 
 createComponent 'Menu',
   render: ->
+    console.log 'printing menu', @props
     div
       className: 'menu'
       children: [
@@ -231,53 +280,55 @@ createComponent 'Menu',
           a
             href: path
             children: "#{section.title}"
+            className: 'is-active' if @props.activeSection.id is section.id
       ]
       onClick: (event) -> event.stopPropagation()
 
 createComponent 'Footer',
   render: ->
     div
-      className: 'section footer'
+      className: 'home-section footer'
 
-createComponent 'PageFollow',
-  getInitialState: ->
-    enter: false
-
-  componentDidMount: ->
-    setTimeout =>
-      @setState enter: true
-    , 100
-
+createComponent 'Page',
   render: ->
+    spec = sectionContent(@props)
+
+    unless spec?.title and spec?.content
+      spec =
+        title: @props.section.title
+        content: 'Content coming soon …'
+
     div
-      className: "page page-follow #{'enter' if @state.enter}"
+      className: "page theme-#{@props.section.theme}"
       children: [
-        h1 children: @props.section.title
-        p children: 'content coming here ...'
+        div className: "background"
+        div className: "page-content", dangerouslySetInnerHTML: { __html: spec.content }
       ]
 
 {
   # Core
-  Main,
-  Menu,
-  ScrolledMenu,
+  RootContainer
+  Menu
+  ScrolledMenu
+  AnimateChildrenChanges
 
   # Home page components
-  Hero,
-  Video,
-  Footer,
+  Hero
+  Video
+  Footer
 
   # Home page sections
-  ImNew,
-  Newsletter,
-  About,
-  Calendar,
-  Splash,
-  Photos1,
-  Photos2,
+  ImNew
+  Newsletter
+  About
+  Calendar
+  Splash
+  Photos1
+  Photos2
 
   # Pages
-  PageFollow
+  Home
+  Page
 } = window.Components
 
 # The router ensures that we update the page once the user navigates
@@ -294,6 +345,7 @@ createComponent 'PageFollow',
     for sectionPath, sectionDetails of SECTIONS
       page sectionPath, do (sectionPath) =>
         =>
+          console.log 'route change!', arguments
           @setState path: sectionPath
           return false
 
@@ -305,4 +357,6 @@ createComponent 'PageFollow',
     page.start()
 
   render: ->
-    Main section: SECTIONS[@state.path]
+    RootContainer
+      section: SECTIONS[@state.path]
+      data: @props.wordpressResources
