@@ -1,0 +1,25 @@
+{
+  "name": "citylife",
+  "version": "1.0.0",
+  "description": "Citylife website",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kentwilliam/church-cms.git"
+  },
+  "author": "Kent William Innholt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kentwilliam/church-cms/issues"
+  },
+  "homepage": "https://github.com/kentwilliam/church-cms#readme",
+  "devDependencies": {
+    "eslint": "^2.2.0"
+  }
+}

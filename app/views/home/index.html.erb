@@ -1,1 +1,5 @@
-HOME!
+<%= react_component(
+  'Router',
+  { path: request.env['PATH_INFO'], wordpressResources: @wordpress_resources },
+  { prerender: params[:noprerender].nil? }
+) %>
