@@ -51,35 +51,19 @@
   .page-transition-enter-active &
     opacity: 1
 
-  //.theme-red &
-    //background: $theme-red
-    //color: white
-
-  //.theme-light-gray &
-    //background: $theme-light-gray
-    //color: $theme-text-body-copy-color
-
-  //.theme-dark-gray &
-    //background: $theme-dark-gray
-    //color: white
-
-  //.theme-white &
-    //background: white
-    //color: $theme-red
-
-  h2
-    min-width: 100%
-    font-weight: $light
-    text-align: center
-    font-size: 32px
-    font-weight: $medium
-    text-transform: uppercase
-    letter-spacing: 1px
-
   h3
     text-transform: uppercase
     font-size: 20px
     letter-spacing: 1px
+
+  h5
+    font-weight: normal
+    font-size: 20px
+    margin: 0
+
+  h6
+    font-weight: bold
+    font-size: 20px
 
   p
     font-size: 16px
@@ -87,24 +71,100 @@
     font-weight: 100
     line-height: 1.8em
 
-  section
-    &.main
-      position: relative
-      margin: 0 auto 20px
-      max-width: 1200px
+  > section
+    margin-top: $section-margin
+    padding: 30px 20px 50px
 
-    &:not(.main)
-      background: white
-      color: $theme-text-body-copy-color
-      padding: 30px
-      margin: 0 0 10px
-      min-width: 250px
+    h1, h2, h3
+      flex-basis: 100%
+      padding: 20px 20px 10px
 
-    @media screen and (min-width: 700px)
-      &.main
+    > div
+      max-width: 1400px
+      margin: 0 auto
+
+      @media (min-width: 1100px)
         display: flex
         flex-wrap: wrap
 
-      &:not(.main)
-        flex: 1 1 300px
-        margin: 10px
+      > section
+        flex: 1
+        margin: 0 20px 60px
+
+        @media (min-width: 1100px)
+          margin-bottom: 0
+
+section.pastors
+  background: $theme-lighter-gray
+
+  img
+    width: 150px
+    height: auto
+
+    @media (min-width: 700px) and (max-width: 1100px)
+      float: right
+      margin: 0 0 30px 30px
+
+    @media (max-width: 1100px)
+      width: 200px
+
+section.directors
+  background: $theme-red
+  color: white
+  border-bottom: 26px solid $theme-dark-gray
+
+  a
+    color: white
+
+    &:hover
+      opacity: 0.8
+
+  > div > section
+    display: flex
+    flex-wrap: wrap
+
+    p
+      line-height: 1.5em
+      margin: 0 0 30px
+      flex-basis: 100%
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+      padding-right: 30px
+
+      @media (min-width: 600px)
+        flex-basis: 50%
+
+      @media (min-width: 800px)
+        flex-basis: 33.33%
+
+      @media (min-width: 1100px)
+        flex-basis: 20%
+
+.expandible-page-subsection
+  position: relative
+
+  .content
+    max-height: 500px
+    overflow: hidden
+    transition: .6s
+
+  &.is-expanded .content
+    max-height: 4000px
+
+  .expand-shade
+    margin-top: -100px
+    position: relative
+    display: block
+    background: linear-gradient(to bottom, transparentize($theme-lighter-gray, 1), $theme-lighter-gray)
+    border-bottom: 20px solid $theme-lighter-gray
+    height: 100px
+    pointer-events: none
+    transition: .6s
+
+    section.platform &
+      background: linear-gradient(to bottom, transparentize(white, 1), white)
+      border-bottom: 20px solid white
+
+  &.is-expanded .expand-shade
+    opacity: 0
