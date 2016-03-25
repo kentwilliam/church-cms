@@ -55,7 +55,7 @@ SECTION_CONTENT_BY_ID =
       subsectionIds: [ 'about-directors' ]
     }
     {
-      title: 'Platform'
+      title: 'What We Believe'
       className: 'platform'
       subsectionIds: [ 'about-platform-values', 'about-platform-vision', 'about-platform-beliefs' ]
       expandible: true

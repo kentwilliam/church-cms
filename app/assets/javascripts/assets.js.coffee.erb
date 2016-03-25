@@ -1,10 +1,16 @@
 ASSETS =
+  new: "<%= asset_path 'new' %>"
   about: "<%= asset_path 'about' %>"
-  associate_pastor: "<%= asset_path 'associate_pastor.png' %>"
   community: "<%= asset_path 'community' %>"
+  volunteer: "<%= asset_path 'volunteer' %>"
+  follow: "<%= asset_path 'follow' %>"
+  give: "<%= asset_path 'give' %>"
+
   lead_pastor: "<%= asset_path 'lead_pastor.png' %>"
-  logo: "<%= asset_path 'logo.png' %>"
+  associate_pastor: "<%= asset_path 'associate_pastor.png' %>"
   youth_pastor: "<%= asset_path 'youth_pastor.png' %>"
+
+  logo: "<%= asset_path 'logo.png' %>"
 
 asset = (id) ->
   return ASSETS[id]
