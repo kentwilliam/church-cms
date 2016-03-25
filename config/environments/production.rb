@@ -79,4 +79,7 @@ Rails.application.configure do
 
   # React production variant (minified)
   config.react.variant = :production
+  config.react.server_renderer_options = {
+    files: ["server_rendering.js"], # files to load for prerendering
+  }
 end

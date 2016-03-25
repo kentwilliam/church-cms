@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Simpler collaboration between Rails and React
-gem 'react-rails', '~> 1.6.0'
+gem 'react-rails', '~> 1.6.2'
 
 # Allows snake -> camel case conversion
 gem 'awrence', '0.1.0'

@@ -38,6 +38,9 @@ Rails.application.configure do
 
   # React development variant (unminified)
   config.react.variant = :development
+  config.react.server_renderer_options = {
+    replay_console: true
+  }
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
