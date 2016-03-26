@@ -1,6 +1,15 @@
 { createComponent } = @Helpers
 { div, nav, a, h1, h2, p, em, span, iframe, button } = React.DOM
 
+createComponent 'LinkButton',
+  render: ->
+    a
+      className: 'button link-button'
+      href: @props.href
+      children: @props.children
+
+{ LinkButton } = @Components
+
 createComponent 'Hero',
   getInitialState: ->
     disableScreen: false
@@ -19,27 +28,39 @@ createComponent 'ImNew',
   render: ->
     div
       className: 'home-section im-new'
-      children: [
+      children: div className: 'content', children: [
         div
           className: 'segment'
           children: [
             h2 children: 'Welcome!'
             p children: 'Did you know that you were created by a loving God who\'s got nothing but great things for you? Join us at City Life, where church is relevant, exciting, presence-driven, and fun.'
-            button children: 'Who are we? »'
+            LinkButton
+              href: '/about'
+              children: 'Who are we? »'
           ]
         div
           className: 'segment'
           children: [
             h2 children: 'What to Expect'
             p children: 'What should I wear? Where do I park? Where do my kids go? Visiting a new church brings up questions, but luckily, we got them all covered.'
-            button children: 'Find out more »'
+            LinkButton
+              href: '/new'
+              children: 'Find out more »'
           ]
         div
           className: 'segment'
           children: [
             h2 children: 'When & Where?'
-            p children: 'We\'d love to see you at 11am, this Sunday! Our main service is at 363 6th Street, San Francisco, California.'
-            button children: 'Directions + Parking »'
+            p children: [
+              'We\'d love to see you at 11am, this Sunday! Our main service is at '
+              a
+                href: 'https://goo.gl/maps/pnCxcZ8EV2F2'
+                children: '363 6th Street, San Francisco, California'
+              '.'
+            ]
+            LinkButton
+              href: '/new'
+              children: 'Directions + Parking »'
           ]
       ]
 
@@ -47,7 +68,7 @@ createComponent 'Newsletter',
   render: ->
     div
       className: 'home-section newsletter'
-      children: [
+      children: div className: 'content', children: [
         "Newsletter sign-up"
       ]
 
@@ -63,7 +84,7 @@ createComponent 'About',
   render: ->
     div
       className: 'home-section about'
-      children: [
+      children: div className: 'content', children: [
         div
           className: 'screen'
         div
@@ -71,28 +92,36 @@ createComponent 'About',
           children: [
             h2 children: 'Team'
             p children: 'Did you know that you were created by a loving God? Join us at City Life, where church is relevant, exciting, presence-driven, and fun.'
-            button children: 'Meet the team »'
+            LinkButton
+              href: '/about'
+              children: 'Meet the team »'
           ]
         div
           className: 'segment'
           children: [
             h2 children: 'Values'
-            p children: 'Did you know that you were created by a loving God? Join us at City Life, where church is relevant, exciting, presence-driven, and fun.'
-            button children: 'More on values »'
+            p children: 'We are striving to fulfill the vision God has placed in our hearts. Our call is clear, our theology is firm and our methodologies are fluid.'
+            LinkButton
+              href: '/about'
+              children: 'More on values »'
           ]
         div
           className: 'segment'
           children: [
             h2 children: 'Vision'
-            p children: 'Did you know that you were created by a loving God? Join us at City Life, where church is relevant, exciting, presence-driven, and fun.'
-            button children: 'More on vision »'
+            p children: 'We exist so that people far from God will encounter the presence of God and experience the life that only Jesus offers. This is our foundation.'
+            LinkButton
+              href: '/about'
+              children: 'More on vision »'
           ]
         div
           className: 'segment'
           children: [
             h2 children: 'Beliefs'
-            p children: 'Did you know that you were created by a loving God? Join us at City Life, where church is relevant, exciting, presence-driven, and fun.'
-            button children: 'More on beliefs »'
+            p children: 'When it comes to the major issues of life, God provides clear answers. The Bible doesn’t just “contain” the Word of God, it is the Word of God.'
+            LinkButton
+              href: '/about'
+              children: 'More on beliefs »'
           ]
       ]
 
@@ -144,5 +173,5 @@ createComponent 'Home',
         Photos2()
         Calendar()
         Splash()
-        Footer()
+        Footer activeSection: @props.section
       ]

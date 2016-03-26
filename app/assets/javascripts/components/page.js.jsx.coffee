@@ -1,10 +1,11 @@
-{ createComponent, sectionContent, asset } = @Helpers
+{ createComponent, contentForSlug, asset } = @Helpers
 { div, img, h1, h2, button } = React.DOM
+{ Footer } = @Components
 
 createComponent 'Page',
   render: ->
     { section } = @props
-    spec = advancedContent @props #) or sectionContent @props
+    spec = advancedContent @props
 
     unless spec?.title and spec?.content
       spec =
@@ -20,7 +21,8 @@ createComponent 'Page',
           style:
             backgroundImage: "url('#{asset(section.id)}')"
           children: h1 children: section.title
-        div className: "page-content", children: spec.content #dangerouslySetInnerHTML: { __html: spec.content }
+        div className: "page-content", children: spec.content
+        Footer activeSection: @props.section
       ]
 
 advancedContent = (props) ->
@@ -90,10 +92,6 @@ SECTION_CONTENT_BY_ID =
     #   subsectionIds: [ 'community-equipping-photo' ]
     # }
   ]
-
-contentForSlug = (props, slug) ->
-  props?.data?.pages?.posts
-    .filter((page) -> page.slug is slug)[0]
 
 createComponent 'PageSubsection',
   render: ->

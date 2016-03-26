@@ -10,7 +10,8 @@ body
 p
   font-family: $theme-font-content
 
-button
+button,
+.button
   background: $theme-red
   color: white
   text-transform: uppercase
@@ -18,17 +19,17 @@ button
   border-radius: 0
   font-weight: normal
   font-size: 15px
-
   display: inline-block
   padding: 4px 20px 2px
   height: auto
+  text-decoration: none
 
   &:hover
     background-color: $theme-red-hover
     color: white
 
 .home-section
-  min-height: 410px
+  min-height: 310px
   background: $theme-light-gray
   margin-bottom: $section-margin
   position: relative
@@ -180,8 +181,10 @@ button
       height: auto
       padding: 0
       background: none
+      height: 100px
 
       .content
+        display: none
         height: 50px
         overflow: hidden
         background: $theme-light-gray
@@ -202,6 +205,9 @@ button
         top: 15px
         right: 15px
         color: transparent
+        width: 64px
+        height: 64px
+        border-radius: 50%
 
         &:hover
           background: $theme-red
@@ -217,23 +223,20 @@ button
           left: 0
           right: 0
           bottom: 0
-        width: 62px
-        height: 62px
-        border-radius: 50%
 
-      &.is-active .toggle
-        background: $theme-dark-gray
-        &:before
-          content: '×'
-          font-size: 40px
-          text-align: center
-          color: white
-          background: none
-          top: 12px
+      // &.is-active .toggle
+      //   background: $theme-dark-gray
+      //   &:before
+      //     content: '×'
+      //     font-size: 40px
+      //     text-align: center
+      //     color: white
+      //     background: none
+      //     top: 12px
 
-      .content
-        pointer-events: none
-        opacity: 0.3
+      // .content
+      //   pointer-events: none
+      //   opacity: 0.3
 
       &.is-active .content
         pointer-events: all
@@ -288,23 +291,43 @@ button
   color: rgba(255, 255, 255, 0.3)
   font-weight: $light
 
+.home-section .content
+  max-width: $max-content-width
+  margin: 0 auto
+
+  @media (min-width: 900px)
+    display: flex
+    justify-content: stretch
+
 .im-new,
 .about
-  padding-top: 60px
-  display: flex
-  justify-content: space-between
+  padding-top: 0
   overflow: hidden
+
+  @media (max-width: 899px)
+    .segment
+      padding-bottom: 90px
+
+  @media (min-width: 900px)
+    p
+      min-height: 140px
+
+  h2, h3
+    clear: left
 
 .im-new
   color: $theme-text-body-copy-color
+
+  .content
+    padding-top: 60px
 
   &:before
     content: "I'm new"
     text-transform: uppercase
     position: absolute
-    top: 134px
-    left: 16px
-    font-size: 302px
+    bottom: -15vw
+    left: 0
+    font-size: 26vw
     color: white
     text-align: left
     white-space: nowrap
@@ -317,48 +340,66 @@ button
 .segment
   position: relative
   flex: 1
-  max-width: calc(33.333% - 30px)
-  padding-right: 6px
+  padding-right: 5%
+  padding-bottom: 10px
+
+  @media (max-width: 900px)
+    padding-bottom: 40px
 
   h2,
   p
     text-align: left
 
   h2
-    font-size: 35px
+    font-size: 30px
+    font-weight: 600
 
   p
     font-size: 16px
     font-family: sans-serif
     line-height: 1.9em
 
-  button
-    position: absolute
-    top: 232px
-    left: 0
+  button, .button
+    width: auto
+    float: left
 
 .about
   color: white
-  height: 500px
   padding-top: 166px
+
+  .content
+    padding-top: 20px
+    padding-bottom: 0
+
+  @media (min-width: 900px)
+    p
+      min-height: 160px
 
   &:before
     content: "About Us"
     text-transform: uppercase
     position: absolute
-    top: -30px
     left: 0
-    font-size: 255px
+    font-size: 20.5vw
     color: $theme-text-body-copy-color
     text-align: left
     white-space: nowrap
+    top: 1vw
 
-  button
+    @media (min-width: 900px)
+      top: -2vw
+    @media (min-width: 1100px)
+      top: -4vw
+
+  .button
     background-color: darken($theme-red, 15)
-    top: 240px
 
-  .segment
-    padding-right: 28px
+    &:hover
+      box-shadow: inset 0 0 0 1px white
+
+  @media (max-width: 699px)
+    .segment
+      padding-right: 28px
 
   .screen
     @extend %fill-parent
@@ -410,4 +451,34 @@ button
   background-color: $theme-red
 
 .footer
-  background: $theme-dark-gray
+  background: mix($theme-dark-gray, black)
+  color: white
+  min-height: 200px
+
+  .content
+    display: flex
+
+    div
+      flex: 1
+
+    div:not(:last-child)
+      padding-right: 30px
+
+    div:last-child
+      flex: none
+      text-align: right
+      opacity: 0.5
+
+  a
+    color: white
+    text-decoration: none
+    font-size: 16px
+    display: inline-block
+    margin-right: 1em
+
+    &.is-active
+      opacity: 0.7
+      cursor: default
+
+    &:hover
+      opacity: 0.8

@@ -5,11 +5,10 @@
   @Components[name] = React.createFactory React.createClass spec
 
 # Extracts the data for a given section id
-@Helpers.sectionContent = (props) ->
-  return unless sectionId = props?.section?.id
 
+@Helpers.contentForSlug = (props, slug) ->
   props?.data?.pages?.posts
-    .filter((page) -> page.slug is sectionId)[0]
+    .filter((page) -> page.slug is slug)[0]
 
 @Helpers.CssTransition = React.createFactory React.addons.CSSTransitionGroup
 
@@ -46,3 +45,15 @@
     id: 'give'
     title: "Give"
     theme: 'red'
+
+MAIN_MENU = [
+  "/",
+  "/new",
+  "/about",
+  "/community",
+  "/volunteer",
+  "/follow",
+  "/give"
+]
+
+@Helpers.MAIN_MENU = _.map MAIN_MENU, (path) => _.extend {}, @Helpers.SECTIONS[path], { path }
