@@ -42,6 +42,18 @@ advancedContent = (props) ->
       ]
 
 SECTION_CONTENT_BY_ID =
+  new: [
+    {
+      title: 'Welcome!'
+      className: 'welcome'
+      subsectionIds: [ 'new-welcome' ]
+    }
+    {
+      title: 'What to Expect'
+      className: 'what-to-expect'
+      subsectionIds: [ 'new-what-to-expect', 'new-when-and-where' ]
+    }
+  ]
   about: [
     {
       title: 'Pastors'
