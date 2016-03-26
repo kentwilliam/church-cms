@@ -10,6 +10,7 @@
 .page,
 .home
   overflow: auto
+  -webkit-overflow-scrolling: touch
   transition: .4s
   background: white
   transform: translate(0, 0)
@@ -103,6 +104,7 @@ section.pastors
   img
     width: 150px
     height: auto
+    border-radius: 50%
 
     @media (min-width: 700px) and (max-width: 1100px)
       float: right
@@ -149,11 +151,14 @@ section.welcome
   color: white
 
   h2
-    font-size: 56px
     font-weight: bold
 
-  p
-    font-size: 20px
+  @media (min-width: 700px)
+    h2
+      font-size: 56px
+
+    p
+      font-size: 20px
 
 section.what-to-expect
   @media (min-width: 1100px)

@@ -24,7 +24,7 @@ button
   height: auto
 
   &:hover
-    background-color: lighten($theme-red, 10)
+    background-color: $theme-red-hover
     color: white
 
 .home-section
@@ -55,6 +55,10 @@ button
   transition: 0.4s
   z-index: 10
 
+  // Only used on smaller resolutions
+  .toggle
+    display: none
+
   .disable-screen &
     opacity: 0
 
@@ -74,6 +78,10 @@ button
     text-align: center
     text-transform: uppercase
     padding-top: 148px
+    cursor: pointer
+
+    &:hover
+      background-color: $theme-red-hover
 
     em, span
       display: block
@@ -105,7 +113,6 @@ button
       opacity: 0.7
 
     &.is-active
-      //color: $theme-red
       box-shadow: inset 0 -5px 0 $theme-light-gray
       cursor: default
 
@@ -117,17 +124,19 @@ button
     width: auto
     height: $menu-height
     opacity: 0
-    position: fixed
     left: 0
     top: 0
     right: 0
-    z-index: 10
-    background: rgba(0,0,0,.9)
+    background: $theme-menu-background-darker
     padding: 0 20px 0 70px
     margin: 0
     vertical-align: top
     text-align: center
     border-right: 50px solid rgba(255,255,255,0.2)
+
+    @media (min-width: 700px)
+      position: fixed
+      z-index: 10
 
     .logo
       position: absolute
@@ -155,7 +164,97 @@ button
   .static-menu &
     opacity: 1
 
-.video
+  @media (max-width: 1000px)
+    .static-menu &,
+    .scrolled-menu &
+      a
+        font-size: 14px
+        margin-left: 8px
+        margin-right: 8px
+
+  @media (max-width: 699px)
+    .static-menu &,
+    .scrolled-menu &
+      border: 0
+      overflow: hidden
+      height: auto
+      padding: 0
+      background: none
+
+      .content
+        height: 50px
+        overflow: hidden
+        background: $theme-light-gray
+        pointer-events: none
+
+        > *
+          opacity: 0
+
+      &.is-active .content
+        height: 320px
+        padding: 10px 0
+        background: $theme-menu-background-darker
+        pointer-events: all
+
+      .toggle
+        display: block
+        position: absolute
+        top: 15px
+        right: 15px
+        color: transparent
+
+        &:hover
+          background: $theme-red
+
+        &:before
+          content: ''
+          background-image: image_url("logo.png")
+          background-position: center center
+          background-repeat: no-repeat
+          background-size: 40px 40px
+          position: absolute
+          top: 0
+          left: 0
+          right: 0
+          bottom: 0
+        width: 62px
+        height: 62px
+        border-radius: 50%
+
+      &.is-active .toggle
+        background: $theme-dark-gray
+        &:before
+          content: '×'
+          font-size: 40px
+          text-align: center
+          color: white
+          background: none
+          top: 12px
+
+      .content
+        pointer-events: none
+        opacity: 0.3
+
+      &.is-active .content
+        pointer-events: all
+        opacity: 1
+
+      .logo
+        width: 100%
+        display: none
+
+      h1,
+      a
+        display: block
+
+      a
+        font-size: 18px
+
+      a.is-active
+        box-shadow:  none
+        opacity: 0.6
+
+.hero .video
   @extend %fill-parent
   cursor: pointer
 
@@ -164,9 +263,11 @@ button
     @extend %fill-parent
     background: rgba(60, 60, 60, 0.8)
     transition: 0.2s
+    // TODO: Temporary
+    display: none
 
-  &:hover:before
-    background: rgba(60, 60, 60, 0.5)
+.hero:not(.disable-screen) .video:before
+  background: rgba(60, 60, 60, 0.5)
 
 .disable-screen .video:before
   background: rgba(60, 60, 60, 0)
@@ -265,23 +366,48 @@ button
     background: transparentize($theme-red, 0.1)
 
 .calendar
-  color: transparentize($theme-text-body-copy-color, 0.8)
-  height: 900px
+  padding: 30px
+  height: 50vw
 
+  h2
+    text-transform: uppercase
+    font-style: italic
+    font-weight: bold
+    color: white
+    font-size: 100px
+    line-height: 50px
+
+    @media (max-width: 699px)
+      font-size: 46px
+      line-height: 30px
+      position: relative
+      top: -18px
+
+  .video
+    @extend %fill-parent
+    top: 100px
+
+    @media (max-width: 699px)
+      top: 50px
+
+.photos-1,
+.photos-2,
 .splash
-  background: image_url("panel-quiet-church.jpg")
+  background-image: image_url("photos-1.jpg")
   background-size: 100%
-  height: 539px
-
-.photos-1
-  background: image_url("photos-1.jpg")
-  background-size: 100%
-  min-height: 272px
+  background-position: center center
+  min-height: 0
+  height: 22vw
 
 .photos-2
-  background: image_url("photos-2.jpg")
-  background-size: 100%
-  min-height: 242px
+  background-image: image_url("photos-2.jpg")
+  height: 20vw
+
+.splash
+  background-image: image_url("panel-quiet-church.jpg")
+  height: 48vw
+  background-repeat: no-repeat
+  background-color: $theme-red
 
 .footer
   background: $theme-dark-gray

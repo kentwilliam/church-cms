@@ -9,7 +9,7 @@ createComponent 'Hero',
     div
       className: "home-section hero #{'disable-screen' if @state.disableScreen}"
       children: [
-        Video()
+        Video videoId: '151691020', autoplay: true, loop: true
         #Menu()
         #ScrolledMenu()
       ]
@@ -101,7 +101,8 @@ createComponent 'Calendar',
     div
       className: 'home-section calendar'
       children: [
-        "Calendar section"
+        h2 children: 'Trending Now'
+        Video videoId: '158974899'
       ]
 
 createComponent 'Splash',
@@ -114,19 +115,20 @@ createComponent 'Video',
     div
       className: 'video'
       children: iframe
-        #src: 'https://player.vimeo.com/video/151691020?' +
-        #'loop=1&' +
-        #'color=000000&' +
-        #'title=0&' +
-        #'byline=0&' +
-        #'portrait=0&' +
-        #'autoplay=1'
-        #width: '100%'
-        #height: '100%'
-        #frameBorder: 0
-        #allowFullScreen: true
+        src: "https://player.vimeo.com/video/#{@props.videoId}?" +
+          'color=000000&' +
+          'title=0&' +
+          'byline=0&' +
+          'portrait=0&' +
+          (if @props.loop then 'loop=1&' else '') +
+          (if @props.autoplay then 'autoplay=1' else '')
+        width: '100%'
+        height: '100%'
+        frameBorder: 0
+        allowFullScreen: true
 
-{ Hero, Video, ImNew, Newsletter, Photos1, About, Photos2, Calendar, Splash, Footer } = @Components
+
+{ Hero, Video, ImNew, Newsletter, Photos1, About, Photos2, Calendar, Splash, Footer, VimeoVideo } = @Components
 
 createComponent 'Home',
   render: ->
@@ -136,7 +138,7 @@ createComponent 'Home',
       children: [
         Hero()
         ImNew()
-        Newsletter()
+        # Newsletter()
         Photos1()
         About()
         Photos2()
