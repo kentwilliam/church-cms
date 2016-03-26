@@ -179,6 +179,30 @@ section.what-to-expect
     b
       display: block
 
+section.groups
+  > div > section:first-of-type
+    flex-basis: 100%
+    min-width: 100%
+
+section.equipping
+  background: $theme-dark-gray
+  color: white
+
+  > div > section:nth-child(3)
+    flex: 2
+
+section.full-size-photo
+  height: 50vw
+  overflow: hidden
+
+  h2
+    display: none
+
+  img
+    width: calc(100% + 100px)
+    height: auto
+    margin: 0 -50px
+
 .expandible-page-subsection
   position: relative
 

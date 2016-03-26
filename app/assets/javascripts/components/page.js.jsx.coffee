@@ -73,6 +73,23 @@ SECTION_CONTENT_BY_ID =
       expandible: true
     }
   ]
+  community: [
+    {
+      title: 'Groups'
+      className: 'groups'
+      subsectionIds: [ 'community-groups-intro', 'community-groups-life-groups', 'community-groups-connect-groups' ]
+    }
+    {
+      title: 'Equipping'
+      className: 'equipping'
+      subsectionIds: [ 'community-equipping-new-life', 'community-equipping-grow' ]
+      # expandible: true
+    }
+    # {
+    #   className: 'full-size-photo'
+    #   subsectionIds: [ 'community-equipping-photo' ]
+    # }
+  ]
 
 contentForSlug = (props, slug) ->
   props?.data?.pages?.posts
