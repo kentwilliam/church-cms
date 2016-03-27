@@ -87,10 +87,55 @@ SECTION_CONTENT_BY_ID =
       subsectionIds: [ 'community-equipping-new-life', 'community-equipping-grow' ]
       # expandible: true
     }
+    {
+      title: 'Ministries'
+      className: 'ministries'
+      subsectionIds: [ 'community-ministries' ]
+    }
     # {
     #   className: 'full-size-photo'
     #   subsectionIds: [ 'community-equipping-photo' ]
     # }
+  ]
+  volunteer: [
+    {
+      title: 'Weekend Ministries'
+      className: 'weekend'
+      subsectionIds: [ 'volunteer-weekend' ]
+    }
+    {
+      title: 'Local Ministries'
+      className: 'local'
+      subsectionIds: [
+        'volunteer-local-intro'
+        'volunteer-local-jail'
+        'volunteer-local-bags-of-love'
+        'volunteer-local-saturday-clinic'
+        'volunteer-local-adopt-a-block'
+        'volunteer-local-partners'
+      ]
+    }
+    {
+      title: 'Global Ministries'
+      className: 'global'
+      subsectionIds: [ 'volunteer-global' ]
+    }
+  ]
+  follow: [
+    {
+      title: 'Latest Sermons'
+      className: 'sermons'
+      subsectionIds: [
+        'watch-and-listen'
+      ]
+    }
+  ]
+  give: [
+    {
+      title: 'Give'
+      className: 'give'
+      subsectionIds: [ 'give' ]
+    }
   ]
 
 createComponent 'PageSubsection',
