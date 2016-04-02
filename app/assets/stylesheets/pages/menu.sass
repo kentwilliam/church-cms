@@ -1,0 +1,241 @@
+@import "mixins/fill_parent"
+@import "mixins/constants"
+
+.hero-menu,
+.site-menu
+  transition: .5s
+  background: $theme-menu-background
+
+.hero-menu
+  width: 480px
+  height: 240px
+  padding: 0 0 0 240px
+  position: absolute
+  left: 50%
+  margin-left: -240px
+  bottom: 60px
+
+  .is-scrolled &
+    opacity: 0
+
+  .logo
+    @extend %fill-parent-left
+    width: 50%
+    background: $theme-red image_url("logo.png") no-repeat center 32px
+    background-size: 110px 109px
+
+    em, span
+      display: block
+      color: white
+      text-transform: uppercase
+      text-align: center
+
+    em
+      font-style: normal
+      font-size: 41px
+      letter-spacing: 1px
+      font-weight: $light
+      padding-top: 148px
+
+    span
+      font-size: 13px
+      letter-spacing: .6px
+      opacity: 0.7
+      font-weight: normal
+      text-indent: 1px
+
+  .menu-items
+    display: flex
+    flex-direction: column
+    margin: 15px 0
+    position: relative
+    top: 1px
+    height: 210px
+
+  a
+    flex: 1
+    display: block
+    text-decoration: none
+    color: white
+    text-transform: uppercase
+    font-size: 20px
+    text-indent: 30px
+    line-height: 34px
+    font-weight: $light
+
+    &:hover
+      opacity: .85
+
+    &:after
+      content: ' »'
+
+.site-menu
+  @extend %fill-parent-top
+  height: $menu-height
+
+  .is-root-home &
+    opacity: 0
+    pointer-events: none
+
+  .is-root-home.is-scrolled &
+    opacity: 1
+    pointer-events: all
+
+  @media (min-width: 700px)
+    position: fixed
+    z-index: 10
+
+  .toggle
+    display: none
+
+  .menu
+    position: relative
+    height: $menu-height
+    max-width: $max-content-width
+    margin: 0 auto
+    padding: 0 20px 0 70px
+    vertical-align: top
+    text-align: center
+    border-right: 50px solid rgba(255,255,255,0.1)
+
+    .logo
+      @extend %fill-parent-left
+      width: 50px
+      height: 50px
+      background: $theme-red image_url("logo.png") no-repeat center center
+      background-size: 34px 34px
+
+      em,
+      span
+        display: none
+
+    a
+      position: relative
+      display: inline-block
+      text-decoration: none
+      text-transform: uppercase
+      color: white
+      line-height: 40px
+      font-size: 18px
+      padding: 0 16px
+      height: 50px
+      line-height: 50px
+
+      &:not(.is-active):not(.logo):hover
+        opacity: 0.7
+
+      &.logo:not(.is-active):hover
+        background-color: $theme-red-hover
+
+      &:after
+        content: ''
+        @extend %fill-parent-bottom
+        left: 16px
+        right: 16px
+        height: 5px
+        background: $theme-light-gray
+        opacity: 0
+        transition: .2s
+
+      &.is-active
+        cursor: default
+
+        &:after
+          opacity: 1
+
+    // .is-scrolled &
+    //   opacity: 1
+
+  // .static-menu &
+  //   opacity: 1
+
+  // @media (max-width: 1000px)
+  //   .static-menu &,
+  //   .scrolled-menu &
+  //     a
+  //       font-size: 14px
+  //       margin-left: 8px
+  //       margin-right: 8px
+
+  // @media (max-width: 699px)
+  //   .menu
+  //     border: 0
+  //     overflow: hidden
+  //     height: auto
+  //     padding: 0
+  //     background: none
+  //     height: 100px
+
+  //     .content
+  //       display: none
+  //       height: 50px
+  //       overflow: hidden
+  //       background: $theme-light-gray
+  //       pointer-events: none
+
+  //       > *
+  //         opacity: 0
+
+  //     &.is-active .content
+  //       height: 320px
+  //       padding: 10px 0
+  //       background: $theme-menu-background-darker
+  //       pointer-events: all
+
+  //     .toggle
+  //       display: block
+  //       position: absolute
+  //       top: 15px
+  //       right: 15px
+  //       color: transparent
+  //       width: 64px
+  //       height: 64px
+  //       border-radius: 50%
+
+  //       &:hover
+  //         background: $theme-red
+
+  //       &:before
+  //         content: ''
+  //         background-image: image_url("logo.png")
+  //         background-position: center center
+  //         background-repeat: no-repeat
+  //         background-size: 40px 40px
+  //         position: absolute
+  //         top: 0
+  //         left: 0
+  //         right: 0
+  //         bottom: 0
+
+  //     // &.is-active .toggle
+  //     //   background: $theme-dark-gray
+  //     //   &:before
+  //     //     content: '×'
+  //     //     font-size: 40px
+  //     //     text-align: center
+  //     //     color: white
+  //     //     background: none
+  //     //     top: 12px
+
+  //     // .content
+  //     //   pointer-events: none
+  //     //   opacity: 0.3
+
+  //     &.is-active .content
+  //       pointer-events: all
+  //       opacity: 1
+
+  //     .logo
+  //       width: 100%
+  //       display: none
+
+  //     h1,
+  //     a
+  //       display: block
+
+  //     a
+  //       font-size: 18px
+
+  //     a.is-active
+  //       box-shadow:  none
+  //       opacity: 0.6

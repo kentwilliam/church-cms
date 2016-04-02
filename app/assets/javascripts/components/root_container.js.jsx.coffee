@@ -7,29 +7,32 @@
 
 { createComponent, CssTransition } = @Helpers
 { div, nav, a, h1, h2, p, em, span, iframe, button } = React.DOM
-{ Page, Home, Menu } = @Components
+{ Page, SiteMenu } = @Components
 
 createComponent 'RootContainer',
   getInitialState: ->
-    scrolled: window?.pageYOffset > 500
+    scrolled: false
     isJavaScriptEnabled: false
-
-  onScroll: ->
-    @setState @getInitialState()
+    onScroll: null
 
   componentDidMount: ->
     # Since `componentDidMount` only runs in the browser, we use it to tell if JS is on
-    @setState isJavaScriptEnabled: true
+    @setState
+      isJavaScriptEnabled: true
+      onScroll: _?.debounce @onScroll, 100
 
-    unless window?.addEventListener && _
-      return
-
-    window.addEventListener 'scroll', _.debounce @onScroll, 50
+  onScroll: (offset) ->
+    # When the user has scrolled down the page, show top menu for core navigation
+    scrolled = offset > 500
+    @setState Object.assign @state, {scrolled}
 
   render: ->
-    if (sectionId = @props.section?.id) and sectionId isnt 'home'
-      pageComponent = Page
-      pageComponentProps = (_?.assign {}, @props, key: @props.section?.id) || @props
+    unless sectionId = @props.section?.id
+      return span children: "404 Not Found"
+
+    pageComponent = Page
+    pageComponentProps = (_?.assign {}, @props, key: @props.section?.id) || @props
+    pageComponentProps.onScroll = @state.onScroll
 
     CssTransition
       className: @className()
@@ -38,19 +41,14 @@ createComponent 'RootContainer',
       transitionLeaveTimeout: 400
       children: [
         @menu()
-        if pageComponent
-          pageComponent pageComponentProps
-        else
-          Home()
+        pageComponent pageComponentProps
       ]
 
   className: ->
     "root-container " +
+    "#{'is-root-home' if @props.section?.id is 'home'} " +
     "#{'is-javascript-enabled' if @state.isJavaScriptEnabled} " +
     "#{'is-scrolled' if @state.scrolled}"
 
   menu: ->
-    div
-      className: 'static-menu'
-      children: Menu activeSection: @props.section
-      key: 'menu'
+    SiteMenu activeSection: @props.section

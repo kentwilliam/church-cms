@@ -8,7 +8,7 @@ createComponent 'LinkButton',
       href: @props.href
       children: @props.children
 
-{ LinkButton } = @Components
+{ LinkButton, SiteMenu, HeroMenu } = @Components
 
 createComponent 'Hero',
   getInitialState: ->
@@ -19,8 +19,7 @@ createComponent 'Hero',
       className: "home-section hero #{'disable-screen' if @state.disableScreen}"
       children: [
         Video videoId: '151691020', autoplay: true, loop: true
-        #Menu()
-        #ScrolledMenu()
+        HeroMenu activeSection: @props.section
       ]
       onClick: => @setState disableScreen: !@state.disableScreen
 
@@ -163,9 +162,8 @@ createComponent 'Home',
   render: ->
     div
       className: 'home'
-      key: 'home'
       children: [
-        Hero()
+        Hero section: @props.section
         ImNew()
         # Newsletter()
         Photos1()
@@ -173,5 +171,5 @@ createComponent 'Home',
         Photos2()
         Calendar()
         Splash()
-        Footer activeSection: @props.section
+        # Footer activeSection: @props.section
       ]

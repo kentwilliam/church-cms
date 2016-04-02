@@ -1,6 +1,6 @@
 { createComponent, contentForSlug, asset } = @Helpers
 { div, img, h1, h2, button } = React.DOM
-{ Footer } = @Components
+{ Home, Footer } = @Components
 
 createComponent 'Page',
   render: ->
@@ -12,18 +12,34 @@ createComponent 'Page',
         title: section.title
         content: 'Content coming soon …'
 
-    div
-      className: "page page-#{section.id} theme-#{section.theme}"
+    props =
+      className: "page page-#{section.id}"
       children: [
         div className: "background"
-        div
-          className: "page-hero"
-          style:
-            backgroundImage: "url('#{asset(section.id)}')"
-          children: h1 children: section.title
-        div className: "page-content", children: spec.content
+        if section.id is 'home'
+          div className: 'page-content', children: Home @props
+        else
+          [
+            div
+              className: "page-hero"
+              style: backgroundImage: "url('#{asset(section.id)}')"
+              children: h1 children: section.title
+            div className: "page-content", children: spec.content
+          ]
         Footer activeSection: @props.section
       ]
+
+    if typeof window?.onscroll isnt 'undefined'
+      props.onScroll = @onScroll
+      props.ref = @getRef
+
+    div props
+
+  getRef: (domNode) ->
+    @domNode = domNode
+
+  onScroll: ->
+    @props.onScroll? @domNode.scrollTop
 
 advancedContent = (props) ->
   return unless sectionContents = SECTION_CONTENT_BY_ID[props?.section?.id]
