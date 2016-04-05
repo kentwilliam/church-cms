@@ -19,13 +19,16 @@ createComponent 'SiteMenu',
   getInitialState: ->
     isActive: false
 
+  componentWillReceiveProps: (newProps) ->
+    # If the user navigates, hide the menu
+    if newProps.activeSection.id isnt @props.activeSection.id
+      @setState isActive: false
+
   render: ->
     div
       className: "site-menu #{'is-active' if @state.isActive}"
       children: [
-        div
-          className: "content"
-          children: Menu useLink: true, activeSection: @props.activeSection
+        Menu useLink: true, activeSection: @props.activeSection
         @toggleButton()
       ]
 

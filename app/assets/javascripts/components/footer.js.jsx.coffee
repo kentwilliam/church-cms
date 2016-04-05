@@ -11,11 +11,13 @@ createComponent 'Footer',
       ]
 
   menu: ->
-    div children: for section in MAIN_MENU
-      a
-        href: section.path
-        children: "#{section.title}"
-        className: 'is-active' if @isActive section
+    div
+      className: 'footer-menu'
+      children: for section in MAIN_MENU
+        a
+          href: section.path
+          children: "#{section.title}"
+          className: 'is-active' if @isActive section
 
   isActive: (section) ->
     if activeSection = @props.activeSection
@@ -25,6 +27,7 @@ createComponent 'Footer',
 
   copyright: ->
     div
+      className: 'copyright'
       children: "© #{YEAR} City Life Church SF"
 
 YEAR = new Date().getFullYear()

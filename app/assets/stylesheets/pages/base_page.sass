@@ -33,33 +33,32 @@ button,
   background: $theme-light-gray
   margin-bottom: $section-margin
   position: relative
-  padding: 40px
+  padding: $page-gutter
+
+  @media (max-width: 499px)
+    padding: $page-gutter-small-screen
 
   &:last-child
     margin-bottom: 0
 
 .hero
-  min-height: 674px
   background: $theme-dark-gray
+  height: 56vw
 
-
-.hero .video
-  @extend %fill-parent
-  cursor: pointer
-
-  &:before
-    content: ""
+  .video
     @extend %fill-parent
-    background: rgba(60, 60, 60, 0.8)
+    cursor: pointer
+
+  .overlay
+    @extend %fill-parent
+    background: rgba(30, 30, 30, 0.7)
     transition: 0.2s
-    // TODO: Temporary
-    display: none
 
-.hero:not(.disable-screen) .video:before
-  background: rgba(60, 60, 60, 0.5)
+    &:hover
+      background: rgba(30, 30, 30, 0)
 
-.disable-screen .video:before
-  background: rgba(60, 60, 60, 0)
+    @media (max-width: 699px)
+      display: none
 
 .newsletter
   background: $theme-dark-gray
@@ -105,7 +104,10 @@ button,
   color: $theme-text-body-copy-color
 
   .content
-    padding-top: 60px
+    padding-top: $page-gutter * 3 / 2
+
+    @media (max-width: 499px)
+      padding-top: $page-gutter-small-screen * 3 / 2
 
   &:before
     content: "I'm new"
@@ -128,11 +130,11 @@ button,
 .segment
   position: relative
   flex: 1
-  padding-right: 5%
-  padding-bottom: 10px
+  padding-right: $page-gutter / 4
+  padding-bottom: $page-gutter / 4
 
   @media (max-width: 900px)
-    padding-bottom: 40px
+    padding-bottom: $page-gutter
 
   h2,
   p
@@ -141,6 +143,9 @@ button,
   h2
     font-size: 30px
     font-weight: 600
+
+    @media (max-width: 500px)
+      font-size: 24px
 
   p
     font-size: 16px
@@ -153,11 +158,22 @@ button,
 
 .about
   color: white
-  padding-top: 166px
+  padding-top: 11vw
+
+  @media (max-width: 499px)
+    padding-top: 16vw
 
   .content
-    padding-top: 20px
+    padding-top: $page-gutter / 2
     padding-bottom: 0
+
+  .screen
+    @extend %fill-parent
+    top: 10vw
+    background: transparentize($theme-red, 0.1)
+
+    @media (max-width: 499px)
+      top: 15vw
 
   @media (min-width: 900px)
     p
@@ -172,12 +188,7 @@ button,
     color: $theme-text-body-copy-color
     text-align: left
     white-space: nowrap
-    top: 1vw
-
-    @media (min-width: 900px)
-      top: -2vw
-    @media (min-width: 1100px)
-      top: -4vw
+    top: -4vw
 
   .button
     background-color: darken($theme-red, 15)
@@ -189,14 +200,10 @@ button,
     .segment
       padding-right: 28px
 
-  .screen
-    @extend %fill-parent
-    top: 130px
-    background: transparentize($theme-red, 0.1)
-
 .calendar
-  padding: 30px
+  padding: 30px 0
   height: 50vw
+  overflow: hidden
 
   h2
     text-transform: uppercase
@@ -205,12 +212,16 @@ button,
     color: white
     font-size: 100px
     line-height: 50px
+    font-size: 11vw
 
     @media (max-width: 699px)
-      font-size: 46px
+      // font-size: 46px
       line-height: 30px
       position: relative
       top: -18px
+
+    // @media (max-width: 499px)
+    //   font-size:
 
   .video
     @extend %fill-parent
@@ -238,40 +249,3 @@ button,
   background-repeat: no-repeat
   background-color: $theme-red
 
-.footer
-  background: mix($theme-dark-gray, black)
-  color: white
-  min-height: 200px
-  padding: $page-gutter
-
-  .content
-    display: flex
-
-    div
-      flex: 1
-
-    div:not(:last-child)
-      padding-right: 30px
-
-    div:last-child
-      flex: none
-      text-align: right
-      opacity: 0.5
-
-  a
-    color: white
-    text-decoration: none
-    font-size: 16px
-    display: inline-block
-    margin-right: 1em
-
-    @media (max-width: 699px)
-      display: block
-      padding: 5px 0
-
-    &.is-active
-      opacity: 0.7
-      cursor: default
-
-    &:hover
-      opacity: 0.8

@@ -25,11 +25,11 @@
 
     &.page-transition-enter
       transform: translate(100%, 0)
-      z-index: 1
+      z-index: $page-layer
 
     &.page-transition-enter-active
       transform: translate(0, 0)
-      z-index: 1
+      z-index: $page-layer
 
     &.page-transition-leave
       &:after
@@ -42,7 +42,7 @@
 .page-content
   padding: 0
   transition: .4s .3s
-  min-height: 500px
+  min-height: 300px
 
   .page-transition-enter &
     opacity: 0
@@ -55,8 +55,11 @@
     font-size: 20px
     letter-spacing: 1px
     font-weight: normal
-    margin-top: 40px
     color: $theme-red
+    margin-top: $page-gutter
+
+    @media (max-width: 500px)
+      margin-top: $page-gutter-small-screen
 
   h5
     font-weight: normal
@@ -78,11 +81,18 @@
 
   > section
     margin-top: $section-margin
-    padding: 30px 20px 50px
+    padding: ($page-gutter * 3 / 4) ($page-gutter / 2) $page-gutter
+
+    @media (max-width: 500px)
+      padding: ($page-gutter-small-screen * 3 / 4) ($page-gutter-small-screen / 2) ($page-gutter-small-screen * 5 / 4)
 
     h1, h2
       flex-basis: 100%
-      padding: 20px 20px 10px
+      padding: ($page-gutter / 2) ($page-gutter / 2) ($page-gutter / 4)
+      font-size: 3.6rem
+
+      @media (max-width: 500px)
+        padding: ($page-gutter-small-screen / 2) ($page-gutter-small-screen / 2) ($page-gutter-small-screen / 4)
 
     > div
       max-width: $max-content-width
@@ -94,10 +104,13 @@
 
       > section
         flex: 1
-        margin: 0 20px 60px
+        margin: 0 ($page-gutter / 2) ($page-gutter * 3 / 2)
 
         @media (min-width: 1100px)
           margin-bottom: 0
+
+        @media (max-width: 500px)
+          margin: 0 ($page-gutter-small-screen / 2) ($page-gutter-small-screen * 3 / 2)
 
 section.pastors
   background: $theme-lighter-gray
@@ -242,6 +255,10 @@ section.sermons
       padding-right: 40px
       width: 100%
 
+      @media (max-width: 499px)
+        text-align: center
+        padding: 0
+
       @media (min-width: 700px)
         width: 33.33%
 
@@ -255,6 +272,9 @@ section.sermons
       height: 140px
       width: auto
       border-radius: 50%
+
+      @media (max-width: 499px)
+        height: 200px
 
     p:last-child
       flex-basis: 100%

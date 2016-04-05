@@ -1,20 +1,18 @@
 @import "mixins/constants"
+@import "mixins/fill_parent"
 
 .page-hero
   margin-top: $menu-height + $section-margin
   width: 100%
   background-position: center center
   background-size: cover
-
   display: flex
   justify-content: center
   align-items: center
+  height: 32vw
 
-  // Used to make the page-hero a certain aspect ratio (roughly 2.4:1)
-  &:after
-    display: block
-    content: ''
-    padding-top: 30.666%
+  @media (max-width: 499px)
+    height: 44vw
 
   h1
     text-transform: uppercase
@@ -22,4 +20,7 @@
     color: white
     font-size: 16vw
     position: relative
-    top: 18px
+    margin: 2vw 0 0
+
+    @media (max-width: 499px)
+      font-weight: normal
