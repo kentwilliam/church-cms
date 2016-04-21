@@ -1,4 +1,4 @@
-{ createComponent } = @Helpers
+{ createComponent, DAYS } = @Helpers
 { div, nav, a, h1, h2, p, em, span, iframe, button } = React.DOM
 
 createComponent 'LinkButton',
@@ -19,6 +19,46 @@ createComponent 'Hero',
         div className: 'overlay'
         HeroMenu activeSection: @props.section
       ]
+
+createComponent 'LiveStream',
+  #getInitialState: ->
+    #timestamp: +new Date()
+
+  #componentDidMount: ->
+    #setInterval (=> @setState timestamp: +new Date()), 1000
+
+  render: ->
+    unless @shouldShowLive()
+      return null
+
+    div
+      className: 'home-section live-stream'
+      children: div
+        className: 'content'
+        children: @live() or @countdown()
+
+  shouldShowLive: ->
+    # The live section is only shown when we're live, or when we just went off the air
+    now = new Date()
+    day = now.getDay()
+    hour = now.getHours()
+    churchIsLive = day is DAYS.Sunday and hour > 10 and hour < 14
+    return churchIsLive
+
+  live: ->
+    [
+      h2 children: "We're Live!"
+      p children: "We go on the air every Sunday at 11am Pacific. This way, you can participate even when you can't attend in person!"
+      div
+        className: 'stream-container'
+        children: iframe
+          src: 'http://livestream.com/accounts/3544533/events/2011453/player?width=560&height=315&autoPlay=true&mute=false'
+          frameborder: 0
+          scrolling: 'no'
+    ]
+
+  countdown: ->
+    'Not live yet!!!'
 
 createComponent 'ImNew',
   render: ->
@@ -58,14 +98,6 @@ createComponent 'ImNew',
               href: '/new'
               children: 'Directions + Parking »'
           ]
-      ]
-
-createComponent 'Newsletter',
-  render: ->
-    div
-      className: 'home-section newsletter'
-      children: div className: 'content', children: [
-        "Newsletter sign-up"
       ]
 
 createComponent 'Photos1',
@@ -127,7 +159,7 @@ createComponent 'Calendar',
       className: 'home-section calendar'
       children: [
         h2 children: 'Trending Now'
-        Video videoId: '161509877'
+        Video videoId: '163289141'
       ]
 
 createComponent 'Splash',
@@ -153,7 +185,7 @@ createComponent 'Video',
         allowFullScreen: true
 
 
-{ Hero, Video, ImNew, Newsletter, Photos1, About, Photos2, Calendar, Splash, Footer, VimeoVideo } = @Components
+{ Hero, Video, LiveStream, ImNew, Newsletter, Photos1, About, Photos2, Calendar, Splash, Footer, VimeoVideo } = @Components
 
 createComponent 'Home',
   render: ->
@@ -161,8 +193,9 @@ createComponent 'Home',
       className: 'home'
       children: [
         Hero section: @props.section
+        LiveStream()
         ImNew()
-        # Newsletter()
+        Newsletter()
         Photos1()
         About()
         Photos2()

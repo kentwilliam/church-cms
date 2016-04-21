@@ -24,7 +24,7 @@ class HomeController < ApplicationController
   def wordpress_resource_url(type)
     raise 'Invalid type' unless [:page, :event].include? type
 
-    "http://localhost/citylife-wordpress/?" +
+    "http://citylifesf.com:82/?" +
       "json=get_posts&" +
       "count=1000&" +
       "post_type=#{type}"

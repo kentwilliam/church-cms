@@ -11,7 +11,8 @@ p
   font-family: $theme-font-content
 
 button,
-.button
+.button,
+input[type=submit]
   background: $theme-red
   color: white
   text-transform: uppercase
@@ -29,7 +30,6 @@ button,
     color: white
 
 .home-section
-  min-height: 310px
   background: $theme-light-gray
   margin-bottom: $section-margin
   position: relative
@@ -60,14 +60,53 @@ button,
     @media (max-width: 699px)
       display: none
 
-.newsletter
-  background: $theme-dark-gray
-
-.about
+.live-stream
   background: $theme-red
+  color: white
+  height: 42vw
+
+  .content
+    position: relative
+
+  h2,
+  p
+    margin-right: 70%
+
+  .stream-container
+    position: absolute
+    right: 0
+    top: 0
+    width: 66.666%
+    padding-top: 37.7%
+    line-height: 0
+    overflow: hidden
+
+  iframe
+    position: absolute
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    border: 0
+
+  @media (max-width: 800px)
+    height: auto
+
+    h2,
+    p
+      margin-right: 0
+      text-align: center
+
+    .stream-container
+      position: static
+      width: auto
+      height: 50vw
+      padding: 0
+
+    iframe
+      position: relative
 
 .im-new,
-.newsletter,
 .about,
 .calendar
   text-align: center
@@ -76,13 +115,54 @@ button,
   color: rgba(255, 255, 255, 0.3)
   font-weight: $light
 
+.newsletter
+  background: $theme-dark-gray
+  color: $theme-light-gray
+  text-align: center
+
+  p
+    margin: 0
+
+  a
+    color: white
+    font-weight: bold
+    text-decoration: none
+
+  label
+    display: none
+
+  input
+    margin: 0
+    height: 44px
+    overflow: hidden
+
+    @media (max-width: 600px)
+      margin: 0 0 10px
+
+    &[type=email]
+      border: none
+      border-radius: 0
+      width: 300px
+      text-align: center
+      font-size: 17px
+      color: $theme-text-body-copy-color
+
+    &[type=submit]
+      margin-left: 10px
+
+.about
+  background: $theme-red
+
 .home-section .content
   max-width: $max-content-width
   margin: 0 auto
 
-  @media (min-width: 900px)
-    display: flex
-    justify-content: stretch
+.im-new,
+.about
+  .content
+    @media (min-width: 900px)
+      display: flex
+      justify-content: stretch
 
 .im-new,
 .about
@@ -122,15 +202,10 @@ button,
     max-width: $max-content-width
     margin: 0 auto
 
-.newsletter
-  font-size: 50px
-  padding-top: 60px
-  min-height: 200px
-
 .segment
   position: relative
   flex: 1
-  padding-right: $page-gutter / 4
+  padding-right: $page-gutter / 2
   padding-bottom: $page-gutter / 4
 
   @media (max-width: 900px)
@@ -152,7 +227,8 @@ button,
     font-family: sans-serif
     line-height: 1.9em
 
-  button, .button
+  button,
+  .button
     width: auto
     float: left
 
@@ -202,7 +278,7 @@ button,
 
 .calendar
   padding: 30px 0
-  height: 50vw
+  height: 66vw
   overflow: hidden
 
   h2
@@ -215,13 +291,9 @@ button,
     font-size: 11vw
 
     @media (max-width: 699px)
-      // font-size: 46px
       line-height: 30px
       position: relative
       top: -18px
-
-    // @media (max-width: 499px)
-    //   font-size:
 
   .video
     @extend %fill-parent

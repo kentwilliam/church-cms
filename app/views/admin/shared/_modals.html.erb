@@ -1,3 +1,0 @@
-<% fields.reject { |_, v| ![:belongs_to, :has_and_belongs_to_many].include?(v) }.keys.each do |key| %>
-  <%= yield "modal_for_#{key}" %>
-<% end %>

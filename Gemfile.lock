@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/typus/typus.git
-  revision: 29665b42e2709a82921177aea0773f640f4c0831
-  specs:
-    typus (4.0.0.beta1)
-      bcrypt (~> 3.1.10)
-      rails (~> 4.2.4)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -50,12 +42,11 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
-    bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
-    byebug (8.2.2)
-    coderay (1.1.0)
+    byebug (8.2.4)
+    coderay (1.1.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -63,14 +54,14 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
-    concurrent-ruby (1.0.0)
+    concurrent-ruby (1.0.1)
     connection_pool (2.2.0)
     debug_inspector (0.0.2)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
     erubis (2.7.0)
-    eventmachine (1.0.9.1)
+    eventmachine (1.2.0.1)
     execjs (2.6.0)
     ffi (1.9.10)
     formatador (0.2.5)
@@ -96,8 +87,8 @@ GEM
     jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
-    jquery-rails (4.1.0)
-      rails-dom-testing (~> 1.0)
+    jquery-rails (4.1.1)
+      rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
@@ -109,10 +100,12 @@ GEM
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.10)
-    mail (2.6.3)
-      mime-types (>= 1.16, < 3)
+    mail (2.6.4)
+      mime-types (>= 1.16, < 4)
     method_source (0.8.2)
-    mime-types (2.99)
+    mime-types (3.0)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2016.0221)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
@@ -157,7 +150,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     raindrops (0.16.0)
-    rake (10.5.0)
+    rake (11.1.2)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
@@ -171,7 +164,7 @@ GEM
       rails (>= 3.2)
       tilt
     ref (2.0.0)
-    sass (3.4.21)
+    sass (3.4.22)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
@@ -183,11 +176,11 @@ GEM
       rdoc (~> 4.0)
     shellany (0.0.1)
     slop (3.6.0)
-    spring (1.6.3)
-    sprockets (3.5.2)
+    spring (1.7.1)
+    sprockets (3.6.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (3.0.1)
+    sprockets-rails (3.0.4)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
@@ -202,12 +195,10 @@ GEM
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.7.2)
-      execjs (>= 0.3.0)
-      json (>= 1.8.0)
-    unicorn (5.0.1)
+    uglifier (3.0.0)
+      execjs (>= 0.3.0, < 3)
+    unicorn (5.1.0)
       kgio (~> 2.6)
-      rack
       raindrops (~> 0.7)
     web-console (2.3.0)
       activemodel (>= 4.0)
@@ -237,7 +228,6 @@ DEPENDENCIES
   sqlite3
   therubyracer
   turbolinks
-  typus!
   uglifier (>= 1.3.0)
   unicorn
   web-console (~> 2.0)

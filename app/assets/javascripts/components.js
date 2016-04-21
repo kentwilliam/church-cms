@@ -3,6 +3,7 @@
 //= require ./assets
 //= require ./components/footer
 //= require ./components/menu
+//= require ./components/home_newsletter
 //= require ./components/home
 //= require ./components/page
 //= require ./components/root_container
