@@ -1,10 +1,10 @@
-{ createComponent, DAYS } = @Helpers
+{ createComponent, contentForSlug, DAYS } = @Helpers
 { div, nav, a, h1, h2, p, em, span, iframe, button } = React.DOM
 
 createComponent 'LinkButton',
   render: ->
     a
-      className: 'button link-button'
+      className: 'button'
       href: @props.href
       children: @props.children
 
@@ -155,14 +155,18 @@ createComponent 'About',
 
 createComponent 'Calendar',
   render: ->
+    # Extract numeric ID for the video (temporary)
+    unless videoId = (contentForSlug @props, 'home-calendar')?.content.match(/[0-9]+/)?[0]
+      return null
+
     div
       className: 'home-section calendar'
       children: [
         h2 children: 'Trending Now'
-        Video videoId: '163289141'
+        Video {videoId}
       ]
 
-createComponent 'Splash',
+createComponent 'SplashSilentChurch',
   render: ->
     div
       className: 'home-section splash'
@@ -184,8 +188,7 @@ createComponent 'Video',
         frameBorder: 0
         allowFullScreen: true
 
-
-{ Hero, Video, LiveStream, ImNew, Newsletter, Photos1, About, Photos2, Calendar, Splash, Footer, VimeoVideo } = @Components
+{ Hero, Video, LiveStream, ImNew, Newsletter, Photos1, About, Photos2, Calendar, SplashSilentChurch, Footer, VimeoVideo } = @Components
 
 createComponent 'Home',
   render: ->
@@ -199,7 +202,7 @@ createComponent 'Home',
         Photos1()
         About()
         Photos2()
-        Calendar()
-        Splash()
+        Calendar @props
+        SplashSilentChurch()
         # Footer activeSection: @props.section
       ]
