@@ -42,13 +42,13 @@ createComponent 'LiveStream',
     now = new Date()
     day = now.getDay()
     hour = now.getHours()
-    churchIsLive = day is DAYS.Sunday and hour > 10 and hour < 14
+    churchIsLive = day is DAYS.Sunday and hour > 9 and hour < 13
     return churchIsLive
 
   live: ->
     [
       h2 children: "We're Live!"
-      p children: "We go on the air every Sunday at 11am Pacific. This way, you can participate even when you can't attend in person!"
+      p children: "We go on the air every Sunday at 10am Pacific. This way, you can participate even when you can't attend in person!"
       div
         className: 'stream-container'
         children: iframe
@@ -88,7 +88,7 @@ createComponent 'ImNew',
           children: [
             h2 children: 'When & Where?'
             p children: [
-              'We\'d love to see you at 11am, this Sunday! Our main service is at '
+              'We\'d love to see you at 10am, this Sunday! Our main service is at '
               a
                 href: 'https://goo.gl/maps/pnCxcZ8EV2F2'
                 children: '363 6th Street, San Francisco, California'
