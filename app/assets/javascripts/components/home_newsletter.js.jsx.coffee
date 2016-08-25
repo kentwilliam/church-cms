@@ -22,12 +22,12 @@ createComponent 'Newsletter',
 
   fields: ->
     [
-      label for: 'mce-EMAIL', children: 'Email Address'
-      input type: 'email', name: 'EMAIL', class: 'required email', id: 'mce-EMAIL', placeholder: 'name@email.com'
+      label htmlFor: 'mce-EMAIL', children: 'Email Address'
+      input type: 'email', name: 'EMAIL', className: 'required email', id: 'mce-EMAIL', placeholder: 'name@email.com'
       div
         style: position: 'absolute', left: '-5000px'
         ariaHidden: true
-        children: input type: 'text', name: 'b_12be4da703d28ef426711f8d6_9ed98fa311', tabindex: '-1', value: ''
+        children: input type: 'text', name: 'b_12be4da703d28ef426711f8d6_9ed98fa311', tabIndex: '-1', value: ''
       input
         type: 'submit'
         value: 'Send Me Updates!'

@@ -202,6 +202,110 @@ input[type=submit]
     max-width: $max-content-width
     margin: 0 auto
 
+.locations
+  background: white
+  margin-bottom: 0
+  padding: 0
+
+  .map
+    background: $theme-light-gray
+    height: 0
+    overflow: hidden
+    transition: .15s .3s
+    position: relative
+
+    iframe
+      opacity: 0
+      transition: .15s
+
+    &.active
+      height: 400px
+      transition: .15s
+
+      iframe
+        opacity: 1
+        transition: .15s .3s
+
+    .details
+      position: absolute
+      right: 0
+      width: 33%
+      padding: $page-gutter
+      top: 0
+      background: $theme-red
+      font-size: 17px
+      color: white
+      bottom: 0
+
+      @media (max-width: 700px)
+        padding: $page-gutter-small-screen
+        font-size: 14px
+
+      span, b
+        display: block
+
+    .close-button
+      position: absolute
+      top: 28px
+      right: 10px
+      opacity: .5
+      font-size: 4rem
+
+      &:hover
+        opacity: 1
+
+  .content
+    display: flex
+    justify-content: center
+    flex-wrap: wrap
+
+    .segment
+      width: 260px
+      min-width: 260px
+      text-align: center
+      flex: 0
+      padding: 0
+      margin: 50px
+      transition: .15s
+      position: relative
+
+      &:hover
+        cursor: pointer
+        transform: scale(1.08)
+
+    img
+      width: 260px
+      height: 260px
+      border-radius: 50%
+      margin: 0
+      box-shadow: 0 0 0 5px $theme-red
+
+    h2
+      text-align: center
+      width: 100%
+      text-transform: uppercase
+      margin: 1.4em 0 0
+
+    h3
+      margin: .9em .5em .5em
+
+    p
+      margin: .5em
+      text-align: center
+      color: $theme-medium-light-gray
+
+  &.active-location_6thstreet .segment
+    left: 180px
+
+    .location_sfstate
+      opacity: .5
+
+  &.active-location_sfstate .segment
+    left: -180px
+
+    .location_6thstreet
+      opacity: .5
+
 .segment
   position: relative
   flex: 1

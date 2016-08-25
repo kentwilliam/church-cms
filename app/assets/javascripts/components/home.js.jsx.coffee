@@ -1,5 +1,6 @@
 { createComponent, contentForSlug, DAYS } = @Helpers
-{ div, nav, a, h1, h2, p, em, span, iframe, button } = React.DOM
+{ div, nav, a, h1, h2, h3, p, em, span, img, b, br, iframe, button } = React.DOM
+MAPS_API_KEY = 'AIzaSyCGkmMW-pjuwyqlIkozcEFi0jpRcIRsrTg'
 
 createComponent 'LinkButton',
   render: ->
@@ -53,7 +54,7 @@ createComponent 'LiveStream',
         className: 'stream-container'
         children: iframe
           src: 'http://livestream.com/accounts/3544533/events/2011453/player?width=560&height=315&autoPlay=true&mute=false'
-          frameborder: 0
+          frameBorder: 0
           scrolling: 'no'
     ]
 
@@ -97,6 +98,98 @@ createComponent 'ImNew',
             LinkButton
               href: '/new'
               children: 'Directions + Parking »'
+          ]
+      ]
+
+{asset} = @Helpers
+
+LOCATIONS =
+  location_6thstreet: 'ChIJ_ZZUtIGAhYARiCCXT4MgFIY' #, '37.7781498,-122.3967934']
+  location_sfstate: 'ChIJD8sx2LN9j4ARrkbwuA-vRo4' #, '37.7781498,-122.3967934']
+
+LOCATION_DETAILS =
+  location_6thstreet: [
+    b children: 'Main Service'
+    'Sundays at 10am'
+    br()
+    b children: 'City Life Youth'
+    '1st & 3rd Fridays of the month at 7pm'
+    br()
+    b children: 'Prayer & Worship service'
+    '1st Saturday of the month at 7pm'
+  ]
+  location_sfstate: [
+    b children: 'Fall Services'
+    br()
+    'September 11th'
+    'September 25th'
+    'October 9th'
+    'October 23rd'
+    'November 13th'
+    'November 27th'
+    'December 11th'
+    br()
+    'Time: 5pm'
+  ]
+
+createComponent 'Locations',
+  getInitialState: ->
+    activeLocation: null
+
+  render: ->
+    place = LOCATIONS[@state.activeLocation]
+    # [place, center] = location if location
+    src = "https://www.google.com/maps/embed/v1/place?" +
+      "q=place_id:#{place}&" +
+      # "center=#{center}&" +
+      "key=#{MAPS_API_KEY}"
+    div
+      className: "home-section locations active-#{@state.activeLocation}"
+      children: [
+        div
+          className: "map #{'active' if @state.activeLocation}"
+          children: [
+            iframe
+              width: '67%'
+              height: '100%'
+              frameBorder: 0
+              style: border: 0
+              src: src
+              allowFullScreen: true
+            div
+              className: 'details'
+              children: [
+                LOCATION_DETAILS[@state.activeLocation]
+                button
+                  className: 'close-button'
+                  children: '×'
+                  onClick: => @setState activeLocation: null
+              ]
+          ]
+        div
+          className: 'content'
+          children: [
+            h2 children: 'Locations'
+            div
+              className: "segment location_6thstreet"
+              children: [
+                img src: asset 'location_6thstreet'
+                h3 children: 'Main Campus'
+                p children: '363 6th Street'
+              ]
+              onClick: => @setState activeLocation: 'location_6thstreet'
+            div
+              className: "segment location_sfstate"
+              children: [
+                img src: asset 'location_sfstate'
+                h3 children: 'SF State'
+                p children: [
+                  'Cesar Chavez Student Center'
+                  br()
+                  'Jack Adams Hall'
+                ]
+              ]
+              onClick: => @setState activeLocation: 'location_sfstate'
           ]
       ]
 
@@ -188,7 +281,21 @@ createComponent 'Video',
         frameBorder: 0
         allowFullScreen: true
 
-{ Hero, Video, LiveStream, ImNew, Newsletter, Photos1, About, Photos2, Calendar, SplashSilentChurch, Footer, VimeoVideo } = @Components
+{
+  Hero,
+  Video,
+  LiveStream,
+  ImNew,
+  Locations,
+  Newsletter,
+  Photos1,
+  About,
+  Photos2,
+  Calendar,
+  SplashSilentChurch,
+  Footer,
+  VimeoVideo
+} = @Components
 
 createComponent 'Home',
   render: ->
@@ -198,6 +305,7 @@ createComponent 'Home',
         Hero section: @props.section
         LiveStream()
         ImNew()
+        Locations()
         Newsletter()
         Photos1()
         About()
