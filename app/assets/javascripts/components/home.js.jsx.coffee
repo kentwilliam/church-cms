@@ -114,9 +114,6 @@ LOCATION_DETAILS =
     br()
     b children: 'City Life Youth'
     '1st & 3rd Fridays of the month at 7pm'
-    br()
-    b children: 'Prayer & Worship service'
-    '1st Saturday of the month at 7pm'
   ]
   location_sfstate: [
     b children: 'Fall Services'
@@ -174,7 +171,7 @@ createComponent 'Locations',
               className: "segment location_6thstreet"
               children: [
                 img src: asset 'location_6thstreet'
-                h3 children: 'Main Campus'
+                h3 children: 'SoMa Campus'
                 p children: '363 6th Street'
               ]
               onClick: => @setState activeLocation: 'location_6thstreet'
@@ -182,11 +179,13 @@ createComponent 'Locations',
               className: "segment location_sfstate"
               children: [
                 img src: asset 'location_sfstate'
-                h3 children: 'SF State'
+                h3 children: 'West Campus'
                 p children: [
-                  'Cesar Chavez Student Center'
+                  'Jack Adams Hall,'
                   br()
-                  'Jack Adams Hall'
+                  'Cesar Chavez Student Center,'
+                  br()
+                  'SF State University'
                 ]
               ]
               onClick: => @setState activeLocation: 'location_sfstate'
