@@ -31,6 +31,7 @@
     for sectionPath, sectionDetails of SECTIONS
       page sectionPath, @createRouteHandlerForPath sectionPath
 
+    page '/westcampus', '/'
     page '*', @on404NotFound
 
     # Start tracking user clicks
